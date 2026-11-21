@@ -1,3 +1,4 @@
+
 # 🛡️ ScamShield — Suspicious Message & Smishing Detector
 
 > **A production-ready, privacy-first, deterministic heuristic analysis engine and template explainer for detecting SMS, WhatsApp, and chat fraud in under 50 ms end to end.**
@@ -302,3 +303,6 @@ Analyzes a message payload for smishing and fraud indicators.
 ## 📄 License
 Released under the MIT License. Built for the Hack2skill Hackathon.
 
+
+# scamshield
+ bc0e3071f23fda51660e3a4d3e3571040e56be67
