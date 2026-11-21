@@ -362,9 +362,9 @@ def get_apex_domain(host: str) -> str:
 # 4. FINANCIAL_LURE
 RE_FINANCIAL_LURE = re.compile(
     r"\b("
-    r"won\s+(?:a\s+)?prize|"
+    r"won\s+(?:a\s+)?(?:cash\s+)?prize|"
     r"lottery(?:\s+winner)?|"
-    r"claim\s+(?:your\s+)?(?:free\s+)?(?:cash\s+)?reward|"
+    r"claim\s+(?:your\s+)?(?:free\s+)?(?:cash\s+)?(?:reward|prize)|"
     r"free\s+(?:cash\s+)?reward|"
     r"cash\s+reward|"
     r"investment\s+doubling|"
@@ -372,7 +372,8 @@ RE_FINANCIAL_LURE = re.compile(
     r"guaranteed\s+returns?|"
     r"crypto\s+profit|"
     r"work\s+from\s+home\s+earning|"
-    r"congratulations\s+you\s+won|"
+    r"congratulations[!,]?\s+(?:you\s+)?(?:have\s+)?won|"
+    r"(?:you\s+)?won\s+(?:a\s+)?(?:cash\s+)?(?:prize|reward|lottery|jackpot|[₹$€£]\s*[\d,]+)|"
     r"lucky\s+(?:draw|winner)|"
     r"claim\s+[₹$€£]\s*[\d,]+|"
     r"jackpot|"
@@ -393,7 +394,7 @@ RE_FINANCIAL_LURE = re.compile(
     re.IGNORECASE,
 )
 
-# Severe investment doubling & guaranteed return scams (immediate high risk)
+# Severe investment doubling, guaranteed returns & advance-fee prize fraud (immediate high risk)
 RE_LURE_SEVERE = re.compile(
     r"\b("
     r"double\s+your\s+money|"
@@ -401,7 +402,20 @@ RE_LURE_SEVERE = re.compile(
     r"guaranteed\s+(?:returns?|profit)|"
     r"100%\s+guaranteed|"
     r"risk[- ]free\s+returns?|"
-    r"investment\s+doubling"
+    r"investment\s+doubling|"
+    r"(?:pay|deposit|transfer)\s+[a-zA-Z0-9\s₹$€£,]{0,30}?(?:fee|charges?|tax|amount|money)\s+[a-zA-Z0-9\s₹$€£,]{0,25}?\s*to\s+(?:claim|receive|release|get)\s+(?:your\s+)?(?:prize|reward|winnings?|lottery|funds?|cash|money)|"
+    r"(?:processing|registration|claiming|advance|clearance)\s+(?:fee|charges?)\s+[a-zA-Z0-9\s₹$€£,]{0,25}?\s*to\s+(?:claim|receive|release|get)\s+(?:your\s+)?(?:prize|reward|winnings?|lottery|funds?|cash)"
+    r")\b",
+    re.IGNORECASE,
+)
+
+# Benign transactional/reward receipts (automatic statement credits, earned loyalty points)
+RE_BENIGN_REWARD = re.compile(
+    r"\b(?:"
+    r"(?:reward\s+)?points\s+(?:have\s+been|will\s+be|are)?\s*(?:automatically\s+)?credited|"
+    r"(?:cashback|points|reward)\s+(?:of\s+[₹$€£]?\s*[\d,]+\s+)?(?:has\s+been|is|was)\s+(?:successfully\s+)?credited|"
+    r"credited\s+to\s+your\s+(?:statement|wallet|account|card)\b|"
+    r"earned\s+[\d,]+\s+(?:icici|hdfc|sbi|axis|reward|bonus)\s+points"
     r")\b",
     re.IGNORECASE,
 )
@@ -510,8 +524,9 @@ RE_PAYMENT_REDIRECT = re.compile(
     r"scan\s+(?:this\s+)?qr(?:\s+code)?\s+to\s+(?:receive|accept|get|claim)|"
     r"qr(?:\s+code)?\s+scan\s+karo\s+(?:paise\s+)?(?:lene|receive|prapt)|"
     r"scan\s+karo\s+paise\s+lene|"
-    r"pay\s+[₹$€£]?\s*[\d,]+\s+to\s+(?:release|claim|verify|receive)|"
-    r"pay\s+[₹$€£]?\s*[\d,]+\s+(?:fee|charges?|penalty)\s+to|"
+    r"(?:pay|deposit|transfer)\s+[₹$€£]?\s*[\d,]+(?:\s+[a-zA-Z\s]{0,25}?(?:fee|charges?|penalty|tax|deposit))?(?:\s+[a-zA-Z0-9\s₹$€£,]{0,25}?)?\s+to\s+(?:release|claim|verify|receive|get)\b|"
+    r"(?:pay|deposit|transfer)\s+[₹$€£]?\s*[\d,]+\s+[a-zA-Z\s]{0,25}?(?:fee|charges?|penalty|tax|deposit)\s+to\b|"
+    r"(?:pay|deposit|transfer)\s+(?:a\s+)?(?:processing|registration|claiming|advance|clearance)\s+(?:fee|charges?|amount)(?:\s+[a-zA-Z0-9\s₹$€£,]{0,25}?)?\s+to\s+(?:claim|receive|release|get)\b|"
     r"claim\s+(?:your\s+)?refund\s+(?:now|here|at\b)|"
     r"claim\s+cashback\s+(?:now|here|at\b)|"
     r"(?:verify|claim)\s+(?:your\s+)?refund|"
@@ -881,6 +896,9 @@ def check_financial_lure(text: str) -> List[Flag]:
     match = RE_FINANCIAL_LURE.search(norm_text)
     if match:
         is_severe = bool(RE_LURE_SEVERE.search(norm_text))
+        # Suppress match if legitimate reward notification without severe payment demands
+        if not is_severe and RE_BENIGN_REWARD.search(norm_text):
+            return flags
         flags.append(
             Flag(
                 id="FINANCIAL_LURE",

@@ -285,3 +285,136 @@ def test_legitimate_refund_receipt_without_qr_safe():
     assert label == "SAFE"
     assert not any(f.id == "PAYMENT_REDIRECT" for f in flags)
 
+
+# ==============================================================================
+# FAMILY 5: ADVANCE-FEE PRIZE / REWARD FRAUD CORRECTIONS
+# ==============================================================================
+
+def test_exact_prize_processing_fee_scam():
+    """Exact test case: Prize lure with upfront processing fee must be SCAM."""
+    msg = "Congratulations! You won ₹25,000. Pay ₹500 processing fee immediately to claim your prize."
+    flags = run_all_heuristics(msg)
+    score, label = evaluate_flags(flags)
+    assert label == "SCAM", f"Expected SCAM, got {label} with score {score}"
+    assert score >= 70, f"Expected score >= 70, got {score}"
+    assert any(f.id == "FINANCIAL_LURE" for f in flags)
+    assert any(f.id == "PAYMENT_REDIRECT" for f in flags)
+
+
+def test_prize_upfront_fee_no_urgency_scam():
+    """Variation: Prize lure with upfront processing fee without urgency keywords must be SCAM."""
+    msg = "You won ₹25,000. Pay ₹500 processing fee to claim your prize."
+    flags = run_all_heuristics(msg)
+    score, label = evaluate_flags(flags)
+    assert label == "SCAM", f"Expected SCAM, got {label} with score {score}"
+    assert score >= 70
+    assert any(f.id == "FINANCIAL_LURE" for f in flags)
+    assert any(f.id == "PAYMENT_REDIRECT" for f in flags)
+
+
+def test_cash_prize_registration_fee_scam():
+    """Variation: Cash prize requiring registration fee to claim must be SCAM."""
+    msg = "You won a cash prize of ₹50,000! Pay ₹1,000 registration fee to claim your prize."
+    flags = run_all_heuristics(msg)
+    score, label = evaluate_flags(flags)
+    assert label == "SCAM"
+    assert score >= 70
+    assert any(f.id == "FINANCIAL_LURE" for f in flags)
+    assert any(f.id == "PAYMENT_REDIRECT" for f in flags)
+
+
+def test_lottery_claiming_charges_scam():
+    """Variation: Lottery jackpot requiring claiming charges transfer must be SCAM."""
+    msg = "Congratulations! You won the lottery jackpot of ₹10,00,000. Transfer ₹2,500 claiming charges to release your funds."
+    flags = run_all_heuristics(msg)
+    score, label = evaluate_flags(flags)
+    assert label == "SCAM"
+    assert score >= 70
+    assert any(f.id == "FINANCIAL_LURE" for f in flags)
+    assert any(f.id == "PAYMENT_REDIRECT" for f in flags)
+
+
+def test_advance_fee_claim_reward_notice_scam():
+    """Variation: Advance clearance fee to claim prize reward must be SCAM."""
+    msg = "Prize claim notice: Pay advance fee of ₹500 to claim your reward."
+    flags = run_all_heuristics(msg)
+    score, label = evaluate_flags(flags)
+    assert label == "SCAM"
+    assert score >= 70
+    assert any(f.id == "FINANCIAL_LURE" for f in flags)
+    assert any(f.id == "PAYMENT_REDIRECT" for f in flags)
+
+
+def test_legitimate_reward_points_credited_safe():
+    """Legitimate reward points notification with automatic statement credit must be SAFE."""
+    msg = "Congratulations! You won 500 reward points on your HDFC credit card. Points will be automatically credited to your statement."
+    flags = run_all_heuristics(msg, sender_id="AX-HDFCBK")
+    score, label = evaluate_flags(flags)
+    assert label == "SAFE", f"Expected SAFE, got {label} with score {score}"
+    assert score < 40
+    assert not any(f.id == "PAYMENT_REDIRECT" for f in flags)
+    assert not any(f.id == "FINANCIAL_LURE" for f in flags)
+
+
+def test_legitimate_wallet_cashback_credited_safe():
+    """Legitimate cashback notification credited directly to wallet must be SAFE."""
+    msg = "Your Amazon Pay cashback of Rs 50 for mobile recharge has been credited to your wallet."
+    flags = run_all_heuristics(msg, sender_id="AX-AMZNPAY")
+    score, label = evaluate_flags(flags)
+    assert label == "SAFE", f"Expected SAFE, got {label} with score {score}"
+    assert score < 40
+    assert not any(f.id == "PAYMENT_REDIRECT" for f in flags)
+    assert not any(f.id == "FINANCIAL_LURE" for f in flags)
+
+
+def test_legitimate_fuel_rewards_earned_safe():
+    """Legitimate credit card loyalty rewards earned on fuel transaction must be SAFE."""
+    msg = "You have earned 120 ICICI Rewards on your fuel transaction at HPCL Outlet. Total points: 4,890."
+    flags = run_all_heuristics(msg, sender_id="DZ-ICICIB")
+    score, label = evaluate_flags(flags)
+    assert label == "SAFE", f"Expected SAFE, got {label} with score {score}"
+    assert score < 40
+    assert not any(f.id == "PAYMENT_REDIRECT" for f in flags)
+    assert not any(f.id == "FINANCIAL_LURE" for f in flags)
+
+
+def test_legitimate_upi_cashback_received_safe():
+    """Legitimate UPI cashback received notification must be SAFE."""
+    msg = "Cashback of Rs 100 has been credited to your bank account via UPI. Ref no 123456."
+    flags = run_all_heuristics(msg, sender_id="AX-SBIUPI")
+    score, label = evaluate_flags(flags)
+    assert label == "SAFE", f"Expected SAFE, got {label} with score {score}"
+    assert score < 40
+    assert not any(f.id == "PAYMENT_REDIRECT" for f in flags)
+
+
+def test_ordinary_workplace_urgency_safe():
+    """Ordinary workplace urgency request without fraud indicators must remain SAFE (<40)."""
+    msg = "Urgent: please submit the quarterly budget report immediately before 5pm."
+    flags = run_all_heuristics(msg)
+    score, label = evaluate_flags(flags)
+    assert label == "SAFE", f"Expected SAFE, got {label} with score {score}"
+    assert score < 40
+    assert not any(f.id == "PAYMENT_REDIRECT" for f in flags)
+    assert not any(f.id == "FINANCIAL_LURE" for f in flags)
+
+
+def test_ordinary_appointment_reminder_safe():
+    """Routine medical appointment reminder must be SAFE (<40)."""
+    msg = "Reminder: Your doctor appointment is scheduled for tomorrow at 10 AM. Please arrive 15 minutes early."
+    flags = run_all_heuristics(msg, sender_id="VM-CLINIC")
+    score, label = evaluate_flags(flags)
+    assert label == "SAFE", f"Expected SAFE, got {label} with score {score}"
+    assert score < 40
+
+
+def test_ordinary_utility_due_reminder_safe():
+    """Legitimate utility bill reminder with due date urgency must remain SAFE (<40)."""
+    msg = "Urgent reminder: Your electricity bill payment of Rs 1,420 is due today. Pay via official BESCOM portal."
+    flags = run_all_heuristics(msg, sender_id="AX-BESCOM")
+    score, label = evaluate_flags(flags)
+    assert label == "SAFE", f"Expected SAFE, got {label} with score {score}"
+    assert score < 40
+    assert not any(f.id == "PAYMENT_REDIRECT" for f in flags)
+
+
