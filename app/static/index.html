@@ -34,11 +34,11 @@
   <!-- ==============================================================================
        1. HEADER (Subex Glassmorphic Navbar & System Status)
        ============================================================================== -->
-  <header class="app-header sticky top-0 z-50 px-6 py-3.5" role="banner">
+  <header id="top" class="app-header sticky top-0 z-50 px-6 py-3.5" role="banner">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
-      <!-- Left: Subex 4-Loop Geometric Ribbon Logo & Brand -->
-      <div class="header-brand flex items-center gap-3">
+      <!-- Left: Subex 4-Loop Geometric Ribbon Logo & Brand (Click to return to starting position) -->
+      <a href="#top" class="header-brand flex items-center gap-3 hover:opacity-90 transition-opacity cursor-pointer text-inherit no-underline" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="ScamShield - Return to starting top">
         <div class="brand-logo-icon-wrap" aria-hidden="true">
           <svg class="header-logo-icon w-8 h-8 text-[#fa5500] filter drop-shadow-[0_2px_8px_rgba(250,85,0,0.3)]" viewBox="0 0 40 40" fill="none">
             <circle cx="14" cy="14" r="8" stroke="currentColor" stroke-width="2.5" stroke-dasharray="12 4"/>
@@ -55,7 +55,7 @@
           </div>
           <span class="header-tagline text-xs text-gray-500 font-medium">Deterministic SMS &amp; Smishing Threat Intelligence</span>
         </div>
-      </div>
+      </a>
 
       <!-- Center: Navigation Links -->
       <nav class="hidden lg:flex items-center gap-8 text-[13px] font-medium text-gray-700" aria-label="Main Navigation">

@@ -956,3 +956,16 @@ body {
 .drop-shadow-\[0_20px_40px_rgba\(250\,85\,0\,0\.35\)\] {
   filter: drop-shadow(0 20px 40px rgba(250, 85, 0, 0.35)) !important;
 }
+
+.header-brand {
+  text-decoration: none !important;
+  color: inherit !important;
+  cursor: pointer !important;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.header-brand:hover {
+  opacity: 0.9 !important;
+}
+.header-brand:active {
+  transform: scale(0.98);
+}
