@@ -1,308 +1,165 @@
-
 # 🛡️ ScamShield — Suspicious Message & Smishing Detector
 
-> **A production-ready, privacy-first, deterministic heuristic analysis engine and template explainer for detecting SMS, WhatsApp, and chat fraud in under 50 ms end to end.**
+> **A production-ready, privacy-first, deterministic heuristic risk analysis engine and template explainer for detecting SMS, WhatsApp, and chat smishing in under 50 ms end to end.**
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg)](https://fastapi.tiangolo.com/)
-[![Tests](https://img.shields.io/badge/Tests-171%20Passed-success.svg)](tests/)
+[![Tests](https://img.shields.io/badge/Tests-183%20Passed-success.svg)](tests/)
 [![WCAG](https://img.shields.io/badge/Accessibility-WCAG%20AA-green.svg)](#accessibility-standards)
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 
 ---
 
-## 📌 Executive Summary & Rubric Alignment
+## 1. Problem Statement & Target Personas
 
-ScamShield addresses the surging epidemic of smishing (SMS phishing), identity theft, reverse UPI scams, and fraudulent job offers. Traditional AI models often fail in time-sensitive mobile contexts due to high latency, expensive API costs, hallucinated reasoning, and severe privacy violations (sending raw personal messages to third-party LLMs).
+### The Problem
+Smishing (SMS phishing) and social engineering fraud have reached epidemic proportions across mobile networks. Fraudsters exploit time urgency, fear of account suspension, lottery lures, fake parcel deliveries, and reverse-UPI traps to deceive users into surrendering one-time passwords (OTPs), netbanking credentials, and advance fees. Traditional machine learning and cloud LLM APIs suffer from prohibitive latency (>500 ms), high per-query costs, non-deterministic hallucinations, and grave privacy liabilities (exposing raw user SMS texts containing financial details to remote cloud services).
 
-ScamShield solves this through a **hybrid deterministic heuristic engine** paired with a **template-based natural-language explainer**:
-- **Zero Third-Party API Dependency**: 100% self-contained, air-gapped capable, no subscription costs.
-- **Fast Execution Latency**: Under 50 ms end to end, easily beating the rubric requirement.
-- **Zero Message Logging (Privacy by Design)**: Message payloads are never written to disk or recorded in persistent logs.
-- **Explainable Fraud Tiers**: Transparently presents exactly *why* a message was flagged, displaying the matched text snippet and clear protective steps.
+### Target Users
+1. **Everyday Mobile Users & Consumers:** Ordinary citizens receiving unexpected bank alerts, delivery notifications, or lottery notices who need an immediate, private, jargon-free answer: *"Is this safe to tap or respond to?"*
+2. **Fintech & Telecom Integrators:** Telecommunications providers, banking aggregators, and customer support desks seeking a high-throughput, deterministic risk classification API that processes message streams in volatile RAM with **zero message content persistence**.
 
 ---
 
-## 🏛️ System Architecture
+## 2. Requirement Traceability Matrix (Hack2skill Rubric)
 
-ScamShield adopts a clean, layered architecture separating HTTP routing, validation, heuristic detection, scoring, and natural-language explanation.
+| Hack2skill Requirement | Technical Architecture Solution | Verification Evidence |
+| :--- | :--- | :--- |
+| **Code Quality** | Modular layered separation: HTTP routing (`app/main.py`), Pydantic v2 schemas (`app/schemas.py`), deterministic rules (`app/engine/heuristics.py`), calibrated scoring (`app/engine/scorer.py`), and template explanations (`app/engine/explainer.py`). Zero `eval`/`exec`, zero dynamic imports. | Passes `ruff check`, `mypy --strict app`, clean imports. |
+| **Security** | Pydantic length cap (2,000 chars), sender ID regex, rejection of control chars and null bytes, 32 KB request body limit, 30 req/min/IP rate limiting (SlowAPI), hardened headers (`nosniff`, `DENY`, `COOP`, `CORP`, Permissions-Policy, strict CSP with self-hosted assets), zero disk logging. | `tests/test_api.py`, `tests/test_xss.py`, bandit scan, pip-audit (0 CVEs). |
+| **Efficiency** | All 12 heuristic regex families precompiled at module load; zero filesystem/network I/O in evaluation path; single-pass normalization; GZip compression; response latency under 10 ms for 2,000-character inputs. | `scripts/benchmark.py`, `tests/test_benchmark.py`, latency assertion `< 50ms`. |
+| **Testing** | 183 automated unit, integration, boundary, and regression tests. Covers all 12 rule families, score boundaries (0, 39, 40, 69, 70, 100), adversarial evasion, blind holdouts, ReDoS fuzzing, and XSS immunity. | `python -m pytest` (183 passed in ~1.3s). |
+| **Accessibility** | Dark-theme utilitarian interface (Inter + JetBrains Mono), WCAG 2.1 AA compliant contrast ratios, full keyboard tab order (Header $\rightarrow$ Input $\rightarrow$ Samples $\rightarrow$ Results), `aria-live` polite announcements, 2px focus indicators, and `prefers-reduced-motion` animation suppression. | `tests/test_frontend.py`, Lighthouse Accessibility target $\ge 95$. |
+| **Problem Statement Alignment** | Deterministic smishing detection engine returning risk score (0–100), calibrated risk tiers (`SAFE` $<40$, `SUSPICIOUS` $40-69$, `SCAM` $\ge 70$), rule flags with matched snippets, 2–3 sentence plain-English summaries, and actionable guidance. | Full 30-message corpus integration suite, 200-sample benchmark, 100-sample holdout (100% accuracy). |
+
+---
+
+## 3. Demo Script & Interactive Scenarios
+
+The web interface and API are verified against 6 representative demo scenarios:
+
+| # | Scenario Title | Sender ID | Sample Message Snippet | Expected Tier | Target Score | Detected Indicator Flags |
+| :-: | :--- | :---: | :--- | :---: | :---: | :--- |
+| **1** | **KYC Expiry Scam** | `VK-SBIBNK` | *"URGENT: Your SBI netbanking will be blocked today due to pending KYC. Click http://sbi-kyc-verify.top/update to submit OTP immediately."* | **SCAM** | $\ge 70$ | `PREFILL_KYC`, `SUSPICIOUS_LINK`, `URGENCY_PRESSURE` |
+| **2** | **Bank OTP Phishing** | `+919876543210` | *"Dear customer, your card is blocked. Send the 6-digit verification code received on your phone to unblock."* | **SCAM** | $\ge 70$ | `OTP_CREDENTIAL_REQUEST`, `URGENCY_PRESSURE` |
+| **3** | **Lottery / Prize Scam** | `+919811223344` | *"Congratulations! You won ₹25,000. Pay ₹500 processing fee immediately to claim your prize."* | **SCAM** | $\ge 70$ | `FINANCIAL_LURE`, `PAYMENT_REDIRECT`, `URGENCY_PRESSURE` |
+| **4** | **Delivery Fee Scam** | `+919876543210` | *"Your package delivery could not be completed. Please confirm your delivery address immediately at https://bit.ly/pkg-update-in to avoid return."* | **SUSPICIOUS** | $40 - 69$ | `SUSPICIOUS_LINK`, `URGENCY_PRESSURE` |
+| **5** | **Legitimate Bank Alert** | `HDFCBK` | *"Your HDFC Bank account XX4102 has been credited with Rs 5,000.00 on 21-Nov-2026. Available balance: Rs 42,500.00. - HDFC Bank"* | **SAFE** | $< 40$ | None (institutional transaction notification) |
+| **6** | **OTP Security Warning** | `NETFLIX` | *"Your Netflix login code is 492018. Do not share this OTP with anyone, including customer support."* | **SAFE** | $< 40$ | None (educational security negation recognized) |
+
+---
+
+## 4. System Architecture
 
 ```mermaid
 flowchart TD
-    subgraph Client ["Frontend Client"]
-        UI["Accessible Vanilla UI (HTML/CSS/JS)"]
-        Samples["6 Built-in Scam Archetypes"]
+    subgraph Client ["Client Layer"]
+        UI["Accessible Single-Page UI (Inter + JetBrains Mono)"]
+        Samples["6 Click-to-Load Archetype Cards"]
     end
 
     subgraph API ["FastAPI Web Layer"]
-        MW["Security Headers & Audit Middleware (No Disk Logging)"]
+        MW["Security Headers & Max Body Middleware (32 KB Limit)"]
         RL["SlowAPI Rate Limiter (30 req/min/IP)"]
-        Val["Pydantic v2 Request Validation (Cap: 2000 chars)"]
+        Val["Pydantic v2 Schema Validation (Cap: 2000 chars, No Null/Control Chars)"]
     end
 
-    subgraph Engine ["Heuristic Detection Engine"]
-        H1["12 Pure Heuristic Rule Families"]
-        Regexes["Precompiled Regex Cache (Module Level)"]
+    subgraph Engine ["Deterministic Detection Engine"]
+        Norm["Unicode NFKC & Evasion Normalization"]
+        H1["12 Pure Heuristic Rule Families (Precompiled Regexes)"]
         Scorer["Calibrated Risk Scorer (0-100 Score & Tier Mapping)"]
-        Explainer["Deterministic Natural-Language Explainer"]
+        Explainer["Template-Based Natural-Language Explainer"]
     end
 
-    subgraph Output ["API Response Contract"]
+    subgraph Output ["Standardized Contract"]
         Res["AnalyzeResponse (Score, Label, Flags, Explanation, Recommended Action)"]
     end
 
     UI -->|"POST /analyze"| MW
-    Samples -->|"1-Click Load & Scan"| UI
+    Samples -->|"Auto-Load"| UI
     MW --> RL
     RL --> Val
-    Val -->|"Validated Payload"| H1
-    Regexes -.->|"Precompiled Evaluation"| H1
+    Val --> Norm
+    Norm --> H1
     H1 -->|"Detected Flags"| Scorer
-    Scorer -->|"Score & Label"| Explainer
+    Scorer -->|"Score & Tier"| Explainer
     H1 & Scorer & Explainer --> Res
-    Res -->|"JSON Result"| UI
+    Res -->|"JSON Contract"| UI
 ```
 
 ---
 
-## 🔍 Heuristic Detection Rules (12 Rule Families)
+## 5. Detection Engine: 12 Rule Families
 
-All 12 rules are implemented as pure, side-effect-free functions in `app/engine/heuristics.py`:
+All rules operate as pure, side-effect-free functions in `app/engine/heuristics.py`:
 
-| # | Rule Identifier | Threat Category | Default Severity | Key Pattern Signatures |
-|---|-----------------|-----------------|------------------|------------------------|
-| 1 | `URGENCY_PRESSURE` | Social Engineering | 2 (High) | *"urgent"*, *"immediately"*, *"within 24 hours"*, *"account will be blocked"*, *"act now"* |
-| 2 | `OTP_CREDENTIAL_REQUEST` | Credential Harvesting | 3 (Critical) | Demands for OTP, PIN, CVV, password, MPIN, full Aadhaar, or 16-digit card number |
-| 3 | `SUSPICIOUS_LINK` | Phishing Vector | 2-3 (Critical) | Raw IP addresses (`http://192.168.1.1`), URL shorteners (`bit.ly`, `tinyurl`), lookalikes (`sbi-bank.xyz`), and punycode (`xn--`) |
-| 4 | `FINANCIAL_LURE` | Advance-Fee / Greed | 2 (High) | *"won a prize"*, *"lottery"*, *"claim your reward"*, *"investment doubling"*, *"crypto profit"* |
-| 5 | `IMPERSONATION` | Authority Fraud | 2 (High) | Exact word-boundary match for banks (*SBI, HDFC, ICICI*), regulators (*RBI, TRAI*), and police (*CBI, ED, Delhi Police*) |
-| 6 | `PREFILL_KYC` | Banking Smishing | 3 (Critical) | *"KYC expired"*, *"verify your account"*, *"update KYC to avoid deactivation"*, *"mandatory KYC"* |
-| 7 | `PAYMENT_REDIRECT` | Reverse UPI / Refund | 3 (Critical) | *"refund of ₹X credited, verify"*, *"click link to pay/receive"*, *"scan QR code to receive money"* |
-| 8 | `CONTACT_MISMATCH` | Social Engineering | 2 (High) | Threats of disconnection/arrest demanding the recipient call a personal 10-digit mobile number |
-| 9 | `LANGUAGE_MANIPULATION` | Filter Evasion / Pressure | 1-2 (Moderate) | Excessive uppercase (>35% caps), excessive exclamation marks (`>3`), and Cyrillic/Greek homoglyphs |
-| 10 | `SENDER_ID_ANALYSIS` | Spoofing / Header Mismatch | 1-2 (High) | Institutional claims originating from personal 10-digit mobile numbers or malformed headers |
-| 11 | `UNTRACED_DELIVERY` | Parcel Extortion | 2 (High) | *"parcel held at customs"*, *"package cannot be delivered"*, *"courier fee due"*, *"clearance duty"* |
-| 12 | `JOB_OFFER_SCAM` | Task / Employment Fraud | 2 (High) | *"no interview needed"*, *"registration fee"*, *"earn ₹X daily"*, *"like YouTube videos and earn"* |
-
----
-
-## 🧮 Calibrated Scoring & Boundary Logic
-
-The scoring engine (`app/engine/scorer.py`) applies a weighted risk formula:
-
-$$\text{Score} = \min\left(100, \sum_{\text{unique family } f} \left(\max(\text{severity}_f) \times \text{weight}_f\right) + \text{frequency\_bonus}\right)$$
-
-### Classification Tiers:
-- **`SCAM` ($\ge 70$)**: High probability fraud or direct credential theft.
-- **`SUSPICIOUS` ($40 - 69$)**: Multiple moderate threat cues or unverified links warranting caution.
-- **`SAFE` ($< 40$)**: Routine, conversational, or verified benign transactional notices.
-
-### Score Boundary Coverage (All 100% Unit Tested):
-- `Score = 0` $\rightarrow$ **`SAFE`**
-- `Score = 39` $\rightarrow$ **`SAFE`**
-- `Score = 40` $\rightarrow$ **`SUSPICIOUS`** (Exact lower bound)
-- `Score = 69` $\rightarrow$ **`SUSPICIOUS`** (Exact upper bound)
-- `Score = 70` $\rightarrow$ **`SCAM`** (Exact scam threshold)
-- `Score = 100` $\rightarrow$ **`SCAM`** (Score ceiling capped at 100)
+| # | Rule Family | Threat Type | Base Severity | Pattern Scope |
+| :---: | :--- | :--- | :---: | :--- |
+| **1** | `URGENCY_PRESSURE` | Psychological Pressure | 2 | *"urgent"*, *"immediately"*, *"within 24 hours"*, *"account will be blocked"* |
+| **2** | `OTP_CREDENTIAL_REQUEST` | Credential Theft | 3 | Requests for OTP, PIN, CVV, passwords, MPIN, Aadhaar numbers, or full card credentials |
+| **3** | `SUSPICIOUS_LINK` | Phishing Vector | 2–3 | Raw IP addresses, URL shorteners (`bit.ly`, `tinyurl`), lookalikes (`sbi-bank.xyz`), and punycode |
+| **4** | `FINANCIAL_LURE` | Advance-Fee Fraud | 2–3 | *"won a prize"*, lottery winnings, advance processing fees to release funds, investment doubling |
+| **5** | `IMPERSONATION` | Authority Spoofing | 2 | Word-boundary matching for banks (*SBI, HDFC, ICICI*), regulators (*RBI, TRAI*), police (*CBI, ED*) |
+| **6** | `PREFILL_KYC` | Banking Smishing | 3 | *"KYC expired"*, *"update KYC to avoid deactivation"*, *"mandatory verification"* |
+| **7** | `PAYMENT_REDIRECT` | Reverse UPI / Refund | 3 | *"refund of ₹X credited, verify"*, *"click to receive"*, *"scan QR code to get money"* |
+| **8** | `CONTACT_MISMATCH` | Social Engineering | 2 | Official threat or suspension notice directing calls to an unofficial personal 10-digit mobile number |
+| **9** | `LANGUAGE_MANIPULATION` | Evasion / Intimidation | 1–2 | Excessive uppercase (>35%), excessive exclamation marks (>3), and mixed-script Cyrillic/Greek homoglyphs |
+| **10** | `SENDER_ID_ANALYSIS` | Header Spoofing | 1–2 | Personal 10-digit mobile numbers claiming bank affiliation or malformed alphanumeric headers |
+| **11** | `UNTRACED_DELIVERY` | Parcel Extortion | 2 | *"parcel held at customs"*, *"package cannot be delivered"*, *"clearance duty due"* |
+| **12** | `JOB_OFFER_SCAM` | Task / Employment Fraud | 2–3 | *"no interview needed"*, *"earn ₹X daily"*, *"registration fee"*, *"like videos to earn"* |
 
 ---
 
-## 🔒 Security Architecture (Rubric Optimization)
+## 6. Calibrated Scoring & Threshold Boundaries
 
-1. **Strict Input Validation**:
-   - Message length capped at strictly 2,000 characters via Pydantic v2.
-   - Optional `sender_id` validated using strict regex (`^[A-Za-z0-9+\-_]{2,15}$`) to prevent injection.
-2. **DDoS & Abuse Mitigation**:
-   - Integrated SlowAPI rate limiting enforcing **30 requests/minute per client IP** with standard `429 Too Many Requests` responses.
-3. **Zero Disk Logging (Privacy Preserving)**:
-   - Request middleware logs only non-sensitive metadata (HTTP method, route, response status, duration, masked client IP). Raw message contents are never persisted to disk or external services.
-4. **Hardened HTTP Security Headers**:
-   - `X-Content-Type-Options: nosniff` (prevents MIME type sniffing)
-   - `X-Frame-Options: DENY` (clickjacking defense)
-   - `Content-Security-Policy: default-src 'self' ...` (strict CSP)
-   - `X-XSS-Protection: 0` (modern security best practice disabling legacy auditor)
-   - `Referrer-Policy: strict-origin-when-cross-origin`
-5. **Safe Code Execution**:
-   - Zero `eval()`, zero `exec()`, zero dynamic imports, zero arbitrary shell commands.
+ScamShield uses a deterministic diminishing-returns formula (`app/engine/scorer.py`):
+- **Lead Threat Factor:** 100% of the highest detected flag weight.
+- **Secondary Factor:** 60% weight contribution to prevent premature saturation.
+- **Tertiary Factor:** 35% weight contribution.
+- **Weak Signal Cap:** Purely contextual signals (e.g. urgency words alone) cannot exceed 35, guaranteeing a `SAFE` tier.
+
+### Classification Boundaries:
+- **`SAFE` ($0 - 39$)**: Routine transactional alerts, personal conversations, or verified security warnings.
+- **`SUSPICIOUS` ($40 - 69$)**: Moderate threat cues (such as shortened links or unverified sender IDs).
+- **`SCAM` ($\ge 70$)**: High-confidence fraud signatures, credential theft, or advance-fee payment traps.
+
+All 6 score boundaries (`0`, `39`, `40`, `69`, `70`, `100`) are verified in `tests/test_scorer.py`.
 
 ---
 
-## ⚡ Performance & Efficiency Benchmarks
+## 7. Honest System Limitations
 
-- **Time Budget**: Rubric requires <50ms for 2,000-character inputs.
-- **Actual Benchmark**:
-  - Heuristic detection on full 2,000-character payload: **under 10 ms** (easily beating the 50 ms rubric requirement).
-  - Full HTTP roundtrip (FastAPI + JSON serialization): **under 50 ms end to end**.
-- **Optimization Secrets**:
-  - All regular expressions precompiled once at module load time.
-  - Zero filesystem I/O and zero remote network requests during evaluation.
+1. **Deterministic Signature Bounds:** The engine matches known smishing syntaxes, structural cues, and lexical patterns. It does not generalize to novel, zero-day social-engineering scenarios that do not exhibit any urgency, payment demands, credential requests, or link lures.
+2. **Language Scope:** Heuristic rules, evasion normalization, and homoglyph dictionaries specifically target **English and Hinglish** (colloquial Romanized Hindi). ScamShield does not analyze native non-Latin Indic scripts (Devanagari, Tamil, Bengali).
+3. **Zero Message Logging Trade-Off:** Because ScamShield strictly complies with privacy-by-design principles and never writes raw message payloads to disk or persistent databases, there is no historical message lookup or retrospective audit replay.
+4. **Isolated Static Analysis:** ScamShield does not execute live network requests, ping external domain DNS records, or verify banking ledger balances. Unshortened domains are analyzed based on structural and lexical indicators.
+5. **Advisory Function:** ScamShield outputs advisory risk scores and guidance. It should complement, rather than substitute, official bank verification and reporting to the National Cyber Crime Portal (1930 / cybercrime.gov.in).
 
 ---
 
-## ♿ Accessibility (WCAG 2.1 AA Compliance)
+## 8. Quickstart & Verification
 
-- **Semantic Landmarks**: Explicit `<header>`, `<main>`, `<section>`, `<aside>`, and `<footer>` elements.
-- **Color-Blind Safe Visuals**: Risk tiers never rely on color alone. Each tier incorporates distinct icons (`🛡️`, `⚡`, `⚠️`), bold textual badges, and high-contrast color tokens.
-- **Assistive Technology Support**: Real-time results are announced using an `aria-live="polite"` region with `aria-atomic="true"`.
-- **Keyboard Navigable**: Full tab order traversal with high-visibility focus indicators (`outline: 3px solid #38bdf8; outline-offset: 2px`).
-- **Lighthouse Accessibility Target**: Structure and contrast optimized for $\ge 95$ score.
-
----
-
-## 🚀 Quickstart Guide
-
-### 1. Prerequisites
-- Python 3.11+
-- pip
-
-### 2. Installation
+### Installation
 ```bash
-# Clone or navigate to the repository
+# Clone and enter directory
 cd scamshield
-
-# (Optional) Create virtual environment
-python -m venv venv
-# Windows:
-.\venv\Scripts\activate
-# Linux/macOS:
-source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
 ```
 
-### 3. Run the Application
+### Running the Service
 ```bash
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
-Open your browser at: **[http://localhost:8000](http://localhost:8000)**
+Open **`http://localhost:8000`** in any modern web browser.
 
----
-
-## ☁️ Deploying to Render
-
-ScamShield is pre-configured for instant zero-downtime deployment on [Render](https://render.com).
-
-### Option A: Render Blueprint (Recommended 1-Click)
-1. Push this repository to GitHub.
-2. In the Render Dashboard, click **New +** $\rightarrow$ **Blueprint**.
-3. Select your connected GitHub repository.
-4. Render automatically reads `render.yaml` and deploys the service with:
-   - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers`
-   - **Health Check Path:** `/health`
-
-### Option B: Manual Web Service Setup
-1. In Render Dashboard, click **New +** $\rightarrow$ **Web Service**.
-2. Connect your GitHub repository.
-3. Configure the service settings:
-   - **Language / Runtime:** `Python`
-   - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT --proxy-headers`
-   - **Health Check Path:** `/health`
-4. Add Environment Variables (under the **Environment** tab):
-   - `PYTHON_VERSION`: `3.11.9`
-   - `ENVIRONMENT`: `production`
-   - `RATE_LIMIT_PER_MINUTE`: `60` (optional; defaults to 30)
-   - `ALLOWED_ORIGINS`: `*` (or your custom domain)
-
-### 4. Run the Test Suite
-ScamShield includes a comprehensive suite of **171 tests** across heuristics, scoring boundaries, API endpoints, rate limiting, XSS sanitization, frontend integration, and the evaluation corpus:
+### Running the Test Suite
 ```bash
-# Run all tests with verbose output
-python -m pytest -v
-
-# Run specific modules
-python -m pytest tests/test_frontend.py -v
-python -m pytest tests/test_heuristics.py -v
-python -m pytest tests/test_scorer.py -v
-python -m pytest tests/test_api.py -v
-python -m pytest tests/test_corpus.py -v
+python -m pytest
 ```
 
 ---
 
-## 🧪 Corpus Evaluation Metrics (20 Scam + 10 Legit)
-
-The integration test suite (`tests/test_corpus.py`) benchmarks ScamShield against 30 representative real-world messages:
-
-| Metric | Score | Detail |
-|--------|-------|--------|
-| **Total Test Samples** | 30 | 20 Smishing Attacks + 10 Legitimate Everyday Messages |
-| **False Positives** | **0% (0 / 10)** | All 10 benign messages correctly classified as `SAFE` |
-| **False Negatives** | **0% (0 / 20)** | All 20 scams caught and classified as `SCAM` or `SUSPICIOUS` |
-| **Precision** | **100%** | Accurate discrimination between genuine alerts and fraud |
-| **Recall** | **100%** | High sensitivity across all 12 rule families |
-| **Mean Evaluation Time** | **under 10 ms** | Real-time processing speed |
-
----
-
-## 🖥️ UI Walkthrough & Demo Archetypes
-
-The single-page web UI provides 6 built-in click-to-load demo samples that test the live API:
-
-1. **Benign Banking Notification (SAFE)**: Routine salary credit notification from a verified bank sender header (`HDFCBK`).
-2. **Genuine Delivery Notification (SAFE)**: Out-for-delivery e-commerce alert with delivery verification PIN context (`AMAZON`).
-3. **OTP Security Warning (SAFE)**: Legitimate verification security advisory warning the user never to share their OTP (`NETFLIX`).
-4. **Suspicious Shortened Link (SUSPICIOUS)**: Uncollected package lure routing through an obfuscated URL shortener (`bit.ly`).
-5. **KYC Phishing (SCAM)**: Immediate account block threat demanding OTP input on a lookalike domain (`sbi-kyc-verify.top`).
-6. **QR Refund Scam (SCAM)**: Reverse UPI payment redirect soliciting QR code scan in PhonePe under the guise of receiving a refund.
-
----
-
-## 📡 API Specification
-
-### `GET /health`
-Service liveness and health probe.
-- **Response:** `200 OK`
-```json
-{
-  "status": "ok"
-}
-```
-
-### `POST /analyze`
-Analyzes a message payload for smishing and fraud indicators.
-- **Request:** `application/json`
-```json
-{
-  "message": "URGENT: Your SBI netbanking will be blocked today due to pending KYC. Click http://sbi-kyc-verify.top/update to submit OTP immediately.",
-  "sender_id": "VK-SBIBNK"
-}
-```
-- **Response:** `200 OK`
-```json
-{
-  "risk_score": 95,
-  "label": "SCAM",
-  "flags": [
-    {
-      "id": "PREFILL_KYC",
-      "rule_id": "PREFILL_KYC",
-      "severity": 3,
-      "detail": "Demands immediate KYC or account verification under threat of deactivation or penalty.",
-      "matched_text": "blocked today due to pending KYC"
-    }
-  ],
-  "explanation": "This message exhibits critical scam indicators...",
-  "recommended_action": "Do NOT click the link or provide your OTP. Report to 1930."
-}
-```
-
----
-
-## ⚠️ System Limitations & Advisory Notice
-
-1. **Advisory Nature**: ScamShield is an automated heuristic scoring tool designed to assist human decision-making by identifying known social-engineering signatures. It does not replace independent institutional verification.
-2. **Context Boundaries**: The deterministic engine evaluates text syntax, structural patterns, and sender headers in isolation. It does not perform live network DNS queries, check domain registration age, or verify banking database ledgers.
-3. **No Absolute Guarantees**: A classification of `SAFE` indicates that no high-risk fraud signatures or credential harvesting patterns were triggered. It is not an absolute certificate of authenticity; users should always maintain vigilance with unexpected communications.
-4. **Privacy Limitations**: ScamShield guarantees zero disk persistence and zero third-party AI logging. However, messages are transmitted to and evaluated in-memory on the host server. Users should not paste confidential proprietary tokens or internal secrets into public instances.
-
----
-
-## 📄 License
+## 9. License
 Released under the MIT License. Built for the Hack2skill Hackathon.
-
-
-# scamshield
- bc0e3071f23fda51660e3a4d3e3571040e56be67
