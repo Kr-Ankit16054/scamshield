@@ -11,7 +11,7 @@
 - **Critical Threat Escape Rate (SCAM -> SAFE)**: **0.00%** (0/30 completely missed)
 - **Binary Threat FNR (Threat -> SAFE)**: **0.00%** (0/50 threats missed as safe)
 - **Binary Threat Accuracy (Safe vs Threat)**: **100.00%** (Threat F1: **100.00%**)
-- **Average Processing Latency**: **0.78 ms** (P99: **1.33 ms**)
+- **Average Processing Latency**: **0.84 ms** (P99: **1.36 ms**)
 
 ---
 
@@ -52,18 +52,18 @@
 | :--- | :---: | :---: | :---: | :---: |
 | **SAFE** | 0 | 4.4 | 0 | 30 |
 | **SUSPICIOUS** | 40 | 41.5 | 40 | 58 |
-| **SCAM** | 75 | 92.2 | 94 | 100 |
+| **SCAM** | 75 | 92.5 | 95 | 100 |
 
 ---
 
 ## 5. Latency Profile
-- **Mean Latency**: `0.78 ms`
-- **Median (P50)**: `0.77 ms`
-- **90th Percentile (P90)**: `1.02 ms`
-- **95th Percentile (P95)**: `1.05 ms`
-- **99th Percentile (P99)**: `1.33 ms`
-- **Min / Max Latency**: `0.50 ms` / `1.33 ms`
-- **Total Batch Time**: `0.078 s` for 100 samples
+- **Mean Latency**: `0.84 ms`
+- **Median (P50)**: `0.84 ms`
+- **90th Percentile (P90)**: `1.06 ms`
+- **95th Percentile (P95)**: `1.13 ms`
+- **99th Percentile (P99)**: `1.36 ms`
+- **Min / Max Latency**: `0.54 ms` / `1.36 ms`
+- **Total Batch Time**: `0.084 s` for 100 samples
 
 ---
 

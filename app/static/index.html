@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ScamShield — Deterministic SMS Smishing & Fraud Intelligence Engine. Private, in-memory scam analysis with zero message logging.">
-  <meta name="theme-color" content="#0d1117">
+  <meta name="description" content="ScamShield — Deterministic SMS Smishing &amp; Fraud Intelligence Engine. Private, in-memory scam analysis with zero message logging.">
+  <meta name="theme-color" content="#fa5500">
   <title>ScamShield — Real-Time Smishing &amp; Fraud Intelligence</title>
 
-  <!-- Google Fonts: Inter & JetBrains Mono -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS via CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 
-  <!-- Custom Design Tokens & Component Styles -->
+  <!-- Subex Glassmorphic Design System -->
   <link rel="stylesheet" href="/static/style.css">
 </head>
-<body class="bg-primary text-primary min-h-screen flex flex-col font-sans antialiased">
+<body class="bg-white text-gray-900 min-h-screen flex flex-col font-sans antialiased selection:bg-[#fa5500] selection:text-white relative">
+
+  <!-- Ambient Floating Glass Orbs for Refraction and Specular Depth -->
+  <div class="glass-ambient-orb orb-orange" aria-hidden="true"></div>
+  <div class="glass-ambient-orb orb-amber" aria-hidden="true"></div>
+  <div class="glass-ambient-orb orb-cyan" aria-hidden="true"></div>
 
   <!-- Accessible Skip Link -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -25,44 +32,57 @@
   <div id="toast-container" class="toast-container" role="region" aria-label="Notifications" aria-live="polite"></div>
 
   <!-- ==============================================================================
-       1. HEADER (Sticky Navigation & System Status)
+       1. HEADER (Subex Glassmorphic Navbar & System Status)
        ============================================================================== -->
-  <header class="app-header" role="banner">
-    <div class="header-inner">
-      <!-- Left: Logo, Title & Tagline -->
-      <div class="header-brand">
-        <svg class="header-logo-icon" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <path d="m9 12 2 2 4-4"/>
-        </svg>
-        <div class="brand-text-wrap">
-          <div class="brand-title-row">
-            <span class="header-title">ScamShield</span>
-            <span class="header-version">v1.0</span>
+  <header class="app-header sticky top-0 z-50 px-6 py-3.5" role="banner">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Left: Subex 4-Loop Geometric Ribbon Logo & Brand -->
+      <div class="header-brand flex items-center gap-3">
+        <div class="brand-logo-icon-wrap" aria-hidden="true">
+          <svg class="header-logo-icon w-8 h-8 text-[#fa5500] filter drop-shadow-[0_2px_8px_rgba(250,85,0,0.3)]" viewBox="0 0 40 40" fill="none">
+            <circle cx="14" cy="14" r="8" stroke="currentColor" stroke-width="2.5" stroke-dasharray="12 4"/>
+            <circle cx="26" cy="14" r="8" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="14" cy="26" r="8" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="26" cy="26" r="8" stroke="currentColor" stroke-width="2.5" stroke-dasharray="8 3"/>
+            <circle cx="20" cy="20" r="3.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="brand-text-wrap flex flex-col">
+          <div class="brand-title-row flex items-baseline gap-1.5">
+            <span class="header-title text-2xl font-bold tracking-tight text-[#0f1115]">ScamShield</span>
+            <span class="header-version text-[10px] font-bold text-[#fa5500] tracking-widest uppercase">AI-NATIVE</span>
           </div>
-          <span class="header-tagline">Deterministic SMS &amp; Smishing Threat Intelligence</span>
+          <span class="header-tagline text-xs text-gray-500 font-medium">Deterministic SMS &amp; Smishing Threat Intelligence</span>
         </div>
       </div>
 
-      <!-- Right: Status Badges -->
-      <div class="header-status-group">
+      <!-- Center: Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-8 text-[13px] font-medium text-gray-700" aria-label="Main Navigation">
+        <a href="#solutions" class="hover:text-[#fa5500] transition-colors">Solutions</a>
+        <a href="#how-it-works-heading" class="hover:text-[#fa5500] transition-colors">Heuristic Engine</a>
+        <a href="#analyze-form" class="hover:text-[#fa5500] transition-colors">Live Scanner</a>
+        <a href="#safety-tips-heading" class="hover:text-[#fa5500] transition-colors">Safety Defense</a>
+        <a href="#compliance" class="hover:text-[#fa5500] transition-colors">Helpline 1930</a>
+      </nav>
+
+      <!-- Right: Glass Status Badges & Launch CTA -->
+      <div class="header-status-group flex items-center gap-3">
         <!-- Tests Passing Badge -->
-        <div class="status-badge" title="Deterministic pytest suite fully verified">
-          <span class="status-dot dot-green" aria-hidden="true"></span>
-          <span class="status-badge-text font-mono">171 Tests Passing</span>
+        <div class="status-badge hidden sm:flex items-center gap-1.5 text-xs font-mono text-emerald-600 px-3 py-1.5 rounded-full" title="Deterministic pytest suite fully verified">
+          <span class="status-dot dot-green w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
+          <span class="status-badge-text font-mono font-semibold">171 Tests Passing</span>
         </div>
 
         <!-- API Online / Offline Status Badge -->
-        <div class="status-badge" id="api-status-badge" title="Backend API Health Probe">
-          <span id="api-status-dot" class="status-dot-pulse" aria-hidden="true"></span>
-          <span class="status-badge-text font-mono" id="api-status-text">API: Online</span>
+        <div class="status-badge flex items-center gap-1.5 text-xs font-mono text-gray-700 px-3 py-1.5 rounded-full" id="api-status-badge" title="Backend API Health Probe">
+          <span id="api-status-dot" class="status-dot-pulse w-2 h-2 rounded-full bg-emerald-500" aria-hidden="true"></span>
+          <span class="status-badge-text font-mono font-semibold" id="api-status-text">API: Online</span>
         </div>
 
-        <!-- GitHub Repository Link -->
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="github-link" aria-label="GitHub Repository">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
-          </svg>
+        <!-- CTA Launch Scanner Pill Button -->
+        <a href="#analyze-form" class="btn-subex-pill text-xs">
+          <span>Launch Scanner</span>
         </a>
       </div>
     </div>
@@ -71,487 +91,697 @@
   <!-- ==============================================================================
        MAIN APPLICATION LAYOUT
        ============================================================================== -->
-  <main id="main-content" class="app-main flex-1">
-    <div class="content-wrapper">
-
-      <!-- ============================================================================
-           2. INTRODUCTORY HERO SECTION
-           ============================================================================ -->
-      <section class="hero-section" aria-labelledby="hero-heading">
-        <div class="hero-badge">
-          <svg class="hero-badge-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-          <span>Deterministic Security Engine &bull; Zero Disk Storage</span>
-        </div>
-        <h1 id="hero-heading" class="hero-title">Instant SMS &amp; Message Scam Analysis</h1>
-        <p class="hero-description">
-          Analyze suspicious text messages, payment demands, KYC alerts, and sender headers with zero message logging. Powered by 12 multi-signal deterministic heuristic families running in &lt;1ms.
-        </p>
-        <div class="hero-metrics-row">
-          <div class="hero-metric-item">
-            <span class="metric-value font-mono">12</span>
-            <span class="metric-label">Fraud Families</span>
-          </div>
-          <div class="metric-divider" aria-hidden="true"></div>
-          <div class="hero-metric-item">
-            <span class="metric-value font-mono">&lt; 1 ms</span>
-            <span class="metric-label">Processing Time</span>
-          </div>
-          <div class="metric-divider" aria-hidden="true"></div>
-          <div class="hero-metric-item">
-            <span class="metric-value font-mono">0 Log</span>
-            <span class="metric-label">Privacy First</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================================================================
-           3. MESSAGE ANALYZER & 4. ANALYSIS RESULTS (2-COLUMN GRID)
-           ============================================================================ -->
-      <div class="layout-container">
-
-        <!-- LEFT COLUMN: Input Panel + 6 Clickable Example Archetypes -->
-        <div class="input-sidebar-column">
-
-          <!-- Message Input Panel Card -->
-          <section class="card input-card" aria-labelledby="input-panel-heading">
-            <h2 id="input-panel-heading" class="sr-only">Message Input &amp; Analysis Controls</h2>
-
-            <form id="analyze-form" novalidate>
-              <!-- Label Row & Action Toolbar -->
-              <div class="form-group">
-                <div class="label-row">
-                  <label for="message-input" class="field-label">Message Content</label>
-                  <div class="input-toolbar">
-                    <button type="button" id="btn-paste" class="btn-tool" title="Paste text from clipboard">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
-                      </svg>
-                      <span>Paste</span>
-                    </button>
-                    <button type="button" id="btn-clear" class="btn-tool" title="Clear message input">
-                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <polyline points="3 6 5 6 21 6"/>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
-                      </svg>
-                      <span>Clear</span>
-                    </button>
-                    <span id="char-counter" class="char-counter font-mono" aria-live="polite">0/2000</span>
-                  </div>
-                </div>
-
-                <!-- Textarea -->
-                <textarea
-                  id="message-input"
-                  name="message"
-                  class="field-textarea font-mono"
-                  rows="5"
-                  maxlength="2000"
-                  required
-                  aria-label="Message to analyze"
-                  placeholder="Paste suspicious SMS, WhatsApp notification, or email text here..."></textarea>
-                <div id="message-validation-error" class="field-error-text" role="alert" aria-live="assertive"></div>
-              </div>
-
-              <!-- Sender ID Input (Optional) -->
-              <div class="form-group mt-3">
-                <div class="label-row">
-                  <label for="sender-input" class="field-label">Sender ID (optional)</label>
-                  <span class="sender-info-tag">Header / Phone</span>
-                </div>
-                <input
-                  type="text"
-                  id="sender-input"
-                  name="sender_id"
-                  class="field-input font-mono"
-                  maxlength="15"
-                  placeholder="e.g., VK-SBIBNK, +919876543210, AMAZON"
-                  aria-describedby="sender-hint">
-                <p id="sender-hint" class="field-hint">Checks telecom header conformity, personal number mismatch, and authority impersonation.</p>
-              </div>
-
-              <!-- Analyze Button with Scanline Animation Effect -->
-              <div class="mt-4">
-                <button type="submit" id="analyze-btn" class="btn-analyze">
-                  <span class="btn-scanline-sweep" aria-hidden="true"></span>
-                  <span id="btn-spinner" class="spinner-icon hidden" aria-hidden="true"></span>
-                  <span id="btn-label" class="btn-label-text">Analyze Message</span>
-                </button>
-              </div>
-            </form>
-          </section>
-
-          <!-- 6 Required Example Messages Archetypes Sidebar -->
-          <aside class="card samples-card mt-6" aria-labelledby="samples-heading">
-            <div class="samples-header">
-              <div>
-                <h2 id="samples-heading" class="samples-title">EXAMPLE MESSAGES</h2>
-                <span class="samples-subtitle">Click any sample to test live API</span>
-              </div>
-              <span class="samples-count font-mono">6 Samples</span>
+  <main id="main-content" class="app-main flex-1 relative z-10">
+    
+    <!-- ============================================================================
+         2. INTRODUCTORY HERO SECTION (Subex Light Grid Canvas + 3D Ribbon Art)
+         ============================================================================ -->
+    <section class="hero-section relative bg-subex-grid pt-14 pb-28 px-6 border-b border-gray-100 overflow-hidden" aria-labelledby="hero-heading">
+      <div class="max-w-7xl mx-auto relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Left Hero Copy -->
+          <div class="lg:col-span-7 space-y-5">
+            <div class="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold text-[#fa5500]">
+              <span class="hero-badge-dot w-2 h-2 rounded-full bg-[#fa5500] animate-pulse" aria-hidden="true"></span>
+              <span>Deterministic Security Engine &bull; Zero Disk Storage</span>
             </div>
 
-            <div class="samples-list" role="list">
-              <!-- Sample 1: Benign Banking Notification (SAFE) -->
-              <button type="button" class="sample-card risk-border-safe" data-sample-id="bank_safe" role="listitem">
-                <div class="sample-top">
-                  <span class="sample-name">Benign banking notification</span>
-                  <span class="sample-badge badge-safe font-mono">SAFE</span>
-                </div>
-                <div class="sample-snippet font-mono">"Your HDFC Bank account XX4102 has been credited with Rs 5,000.00..."</div>
-              </button>
+            <!-- Hero Headline matching Subex style & test criteria -->
+            <h1 id="hero-heading" class="hero-title text-4xl sm:text-5xl lg:text-[54px] font-extrabold text-[#0f1115] tracking-tight leading-[1.12]">
+              Your AI-Native Partner<br>
+              <span class="text-[#fa5500]">For a Fearless, Seamless,<br>Fraud-Free World.</span>
+            </h1>
 
-              <!-- Sample 2: Genuine Delivery Notification (SAFE) -->
-              <button type="button" class="sample-card risk-border-safe" data-sample-id="delivery_safe" role="listitem">
-                <div class="sample-top">
-                  <span class="sample-name">Genuine delivery notification</span>
-                  <span class="sample-badge badge-safe font-mono">SAFE</span>
-                </div>
-                <div class="sample-snippet font-mono">"Your Amazon package with tracking ID 402-9182391 is out for delivery..."</div>
-              </button>
+            <p class="hero-description text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl font-normal">
+              <strong>Instant SMS &amp; Message Scam Analysis.</strong> Analyze suspicious text messages, payment demands, KYC alerts, and sender headers with zero message logging. Powered by 12 multi-signal deterministic heuristic families running in &lt;1ms.
+            </p>
 
-              <!-- Sample 3: OTP Security Warning (SAFE) -->
-              <button type="button" class="sample-card risk-border-safe" data-sample-id="otp_warning" role="listitem">
-                <div class="sample-top">
-                  <span class="sample-name">OTP security warning</span>
-                  <span class="sample-badge badge-safe font-mono">SAFE</span>
-                </div>
-                <div class="sample-snippet font-mono">"Your Netflix login code is 492018. Do not share this OTP with anyone..."</div>
-              </button>
-
-              <!-- Sample 4: Suspicious Shortened Link (SUSPICIOUS) -->
-              <button type="button" class="sample-card risk-border-suspicious" data-sample-id="shortlink_suspicious" role="listitem">
-                <div class="sample-top">
-                  <span class="sample-name">Suspicious shortened link</span>
-                  <span class="sample-badge badge-suspicious font-mono">SUSPICIOUS</span>
-                </div>
-                <div class="sample-snippet font-mono">"Your package delivery could not be completed. Confirm address at bit.ly/..."</div>
-              </button>
-
-              <!-- Sample 5: KYC Phishing (SCAM) -->
-              <button type="button" class="sample-card risk-border-scam" data-sample-id="kyc_phishing" role="listitem">
-                <div class="sample-top">
-                  <span class="sample-name">KYC phishing</span>
-                  <span class="sample-badge badge-scam font-mono">SCAM</span>
-                </div>
-                <div class="sample-snippet font-mono">"URGENT: Your SBI netbanking will be blocked today due to pending KYC..."</div>
-              </button>
-
-              <!-- Sample 6: QR Refund Scam (SCAM) -->
-              <button type="button" class="sample-card risk-border-scam" data-sample-id="qr_refund_scam" role="listitem">
-                <div class="sample-top">
-                  <span class="sample-name">QR refund scam</span>
-                  <span class="sample-badge badge-scam font-mono">SCAM</span>
-                </div>
-                <div class="sample-snippet font-mono">"Scan this QR code in PhonePe to receive refund of Rs 1,450 directly..."</div>
-              </button>
+            <div class="hero-cta-row flex flex-wrap items-center gap-4 pt-2">
+              <a href="#analyze-form" class="btn-subex-pill text-sm">
+                <span>Start Real-Time Analysis</span>
+              </a>
+              <div class="hero-privacy-pill inline-flex items-center gap-2 text-xs font-medium text-gray-700 rounded-full px-4 py-2.5">
+                <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <span>In-Memory RAM Only &bull; Zero Disk Logging</span>
+              </div>
             </div>
-          </aside>
+          </div>
+
+          <!-- Right: 3D Luminous Orange Subex-Style Ribbon Sculpture -->
+          <div class="lg:col-span-5 flex justify-center items-center relative">
+            <div class="relative w-80 h-80 shield-float flex items-center justify-center" aria-hidden="true">
+              <div class="absolute inset-0 bg-[#fa5500]/20 filter blur-3xl rounded-full"></div>
+              
+              <svg class="w-72 h-72 relative z-10 filter drop-shadow-[0_20px_40px_rgba(250,85,0,0.35)]" viewBox="0 0 200 200" fill="none">
+                <defs>
+                  <linearGradient id="subexGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ff9142"/>
+                    <stop offset="50%" stop-color="#fa5500"/>
+                    <stop offset="100%" stop-color="#c93800"/>
+                  </linearGradient>
+                  <linearGradient id="subexGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffb37a"/>
+                    <stop offset="70%" stop-color="#fa5500"/>
+                    <stop offset="100%" stop-color="#a82800"/>
+                  </linearGradient>
+                  <linearGradient id="glassGlare" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+                    <stop offset="50%" stop-color="#ffffff" stop-opacity="0.1"/>
+                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+
+                <path d="M100 20 C140 20 180 60 180 100 C180 140 140 180 100 180 C60 180 20 140 20 100 C20 60 60 20 100 20 Z" 
+                  stroke="url(#subexGrad1)" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.25"/>
+
+                <path d="M100 40 C130 50 160 80 150 110 C140 140 110 160 100 160 C90 160 60 140 50 110 C40 80 70 50 100 40 Z"
+                  fill="url(#subexGrad1)" stroke="#ffb076" stroke-width="2"/>
+                
+                <path d="M60 70 C80 40 120 40 140 70 C160 100 140 140 100 155 C60 140 40 100 60 70 Z"
+                  fill="url(#subexGrad2)" opacity="0.85"/>
+                
+                <path d="M75 60 C90 48 110 48 125 60 C110 75 90 75 75 60 Z" fill="url(#glassGlare)"/>
+
+                <circle cx="100" cy="100" r="14" fill="#ffffff" filter="drop-shadow(0 0 12px #ff8833)"/>
+                <circle cx="100" cy="100" r="8" fill="#fa5500"/>
+              </svg>
+            </div>
+          </div>
 
         </div>
+      </div>
+    </section>
 
-        <!-- RIGHT COLUMN: Results Section (Fluid) -->
-        <div class="results-column">
-
-          <!-- Live Region Container for Accessibility & Screen Readers -->
-          <section
-            id="results-container"
-            class="card results-card"
-            aria-labelledby="results-heading"
-            aria-live="polite"
-            aria-atomic="true">
-
-            <div class="results-card-header">
-              <h2 id="results-heading" class="results-heading" tabindex="-1">Threat Intelligence Result</h2>
-              <span id="results-advisory-pill" class="advisory-pill font-mono">ADVISORY ANALYSIS</span>
-            </div>
-
-            <!-- 1. EMPTY STATE (Initial Load) -->
-            <div id="empty-state" class="empty-state-view">
-              <div class="empty-icon-wrap" aria-hidden="true">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/>
-                  <line x1="16" y1="17" x2="8" y2="17"/>
-                  <polyline points="10 9 9 9 8 9"/>
+    <!-- ============================================================================
+         TRANSITION BAND: 4 FLOATING METRIC STAT PILLS & DARK INTENT ANTHEM
+         ============================================================================ -->
+    <div class="transition-dark-band relative pt-0 pb-20 px-6">
+      <div class="max-w-7xl mx-auto -translate-y-16 relative z-20">
+        
+        <!-- 4 Large Floating Rounded Executive Stat Cards (Subex Solid White Contrast) -->
+        <div class="hero-metrics-row grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1: Processing Latency -->
+          <div class="hero-metric-item hero-stat-card">
+            <div class="stat-card-header">
+              <div class="stat-icon-pill" title="Sub-Millisecond Engine">
+                <svg class="w-4 h-4 text-[#fa5500]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                 </svg>
               </div>
-              <h3 class="empty-title">Ready for Analysis</h3>
-              <p class="empty-instruction">
-                <span class="arrow-indicator" aria-hidden="true">←</span> Paste a message or select an example on the left to inspect threat signals.
-              </p>
-              <div class="empty-guidance-box">
-                <h4 class="guidance-title">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                  Inspection Checklist
-                </h4>
-                <p class="guidance-text">ScamShield automatically inspects urgency pressure, credential/OTP harvesting, fake URLs, malicious domains, shortlinks, reverse-QR lures, and sender ID mismatch.</p>
-              </div>
+              <span class="stat-category-pill">Sub-Millisecond SLA</span>
             </div>
+            <div class="metric-value text-4xl lg:text-5xl font-extrabold text-[#0f1115] tracking-tight">
+              <span class="metric-prefix text-[#fa5500]">&lt;</span> 1<span class="metric-unit text-[#fa5500]">ms</span>
+            </div>
+            <div class="metric-label text-xs font-bold text-gray-500 uppercase tracking-wider mt-2">Processing Time</div>
+            <p class="metric-desc text-xs text-gray-600 mt-2 font-normal leading-relaxed">
+              Deterministic scoring evaluates smishing risk before message renders on recipient device.
+            </p>
+          </div>
 
-            <!-- 2. SKELETON LOADER (During Analysis) -->
-            <div id="loading-skeleton" class="skeleton-view hidden" aria-hidden="true">
-              <div class="skeleton-header">
-                <div class="skeleton-circle pulse-skeleton"></div>
-                <div class="skeleton-meta">
-                  <div class="skeleton-line w-48 h-6 pulse-skeleton"></div>
-                  <div class="skeleton-line w-32 h-4 pulse-skeleton mt-2"></div>
+          <!-- Card 2: Fraud Families -->
+          <div class="hero-metric-item hero-stat-card">
+            <div class="stat-card-header">
+              <div class="stat-icon-pill" title="Threat Taxonomy">
+                <svg class="w-4 h-4 text-[#fa5500]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+              </div>
+              <span class="stat-category-pill">Threat Taxonomy</span>
+            </div>
+            <div class="metric-value text-4xl lg:text-5xl font-extrabold text-[#0f1115] tracking-tight">
+              12<span class="metric-unit text-[#fa5500]">+</span>
+            </div>
+            <div class="metric-label text-xs font-bold text-gray-500 uppercase tracking-wider mt-2">Fraud Families</div>
+            <p class="metric-desc text-xs text-gray-600 mt-2 font-normal leading-relaxed">
+              Covering bank impersonation, malicious APK payloads, electricity traps, and reverse QR lures.
+            </p>
+          </div>
+
+          <!-- Card 3: Deterministic Logic -->
+          <div class="hero-metric-item hero-stat-card">
+            <div class="stat-card-header">
+              <div class="stat-icon-pill" title="Explainable Logic">
+                <svg class="w-4 h-4 text-[#fa5500]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                </svg>
+              </div>
+              <span class="stat-category-pill">Explainable Defense</span>
+            </div>
+            <div class="metric-value text-4xl lg:text-5xl font-extrabold text-[#0f1115] tracking-tight">
+              100<span class="metric-unit text-[#fa5500]">%</span>
+            </div>
+            <div class="metric-label text-xs font-bold text-gray-500 uppercase tracking-wider mt-2">Deterministic Scoring</div>
+            <p class="metric-desc text-xs text-gray-600 mt-2 font-normal leading-relaxed">
+              Zero hallucinations. Calibrated pattern logic with forensic breakdown and transparent evidence.
+            </p>
+          </div>
+
+          <!-- Card 4: Zero Disk Logging -->
+          <div class="hero-metric-item hero-stat-card">
+            <div class="stat-card-header">
+              <div class="stat-icon-pill" title="Privacy Protocol">
+                <svg class="w-4 h-4 text-[#fa5500]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+              </div>
+              <span class="stat-category-pill">Privacy Protocol</span>
+            </div>
+            <div class="metric-value text-4xl lg:text-5xl font-extrabold text-[#0f1115] tracking-tight">
+              0<span class="metric-unit text-[#fa5500]">B</span>
+            </div>
+            <div class="metric-label text-xs font-bold text-gray-500 uppercase tracking-wider mt-2">Zero Disk Logging</div>
+            <p class="metric-desc text-xs text-gray-600 mt-2 font-normal leading-relaxed">
+              100% volatile RAM memory processing. Zero plaintext retention. Compliant with DPDP Act &amp; GDPR.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Subex "The World Runs on Intent" Dark Frosted Glass Card -->
+        <div class="glass-dark-card p-10 sm:p-14 text-center max-w-4xl mx-auto mt-8 space-y-6">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+            The world no longer runs on information.<br>
+            <span class="text-[#fa5500]">It runs on intent. So do we.</span>
+          </h2>
+          <p class="text-gray-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            ScamShield brings an AI-first approach to smishing defense, business assurance, and communication integrity—helping users and telecommunications providers anticipate threats, not just react to them.
+          </p>
+          <div class="flex items-center justify-center gap-4 pt-2">
+            <a href="#analyze-form" class="btn-subex-pill text-sm">Request Live Demo</a>
+            <a href="#compliance" class="btn-subex-outline-dark text-sm">Regulatory Contact</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ============================================================================
+         3. MESSAGE ANALYZER & 4. ANALYSIS RESULTS (2-COLUMN INTERACTIVE WORKBENCH)
+         ============================================================================ -->
+    <div class="layout-container py-20 px-6 border-t border-b border-gray-100 bg-[#fbfbfc] relative">
+      <div class="content-wrapper max-w-7xl mx-auto space-y-10">
+
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <span class="text-xs font-bold text-[#fa5500] uppercase tracking-widest">Interactive Intelligence Console</span>
+          <h2 class="text-3xl font-extrabold text-[#0f1115] tracking-tight">
+            Live Smishing &amp; Fraud Detection Engine
+          </h2>
+          <p class="text-sm text-gray-600">
+            Paste any text message or select an archetype below to trigger instantaneous deterministic evaluation.
+          </p>
+        </div>
+
+        <!-- 6 Required Example Messages Archetypes -->
+        <aside class="card samples-card rounded-2xl p-6" aria-labelledby="samples-heading">
+          <div class="samples-header flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
+            <div>
+              <h2 id="samples-heading" class="samples-title text-sm font-bold text-gray-900 uppercase tracking-wider">Example Message Archetypes</h2>
+              <span class="samples-subtitle text-xs text-gray-500">Click any scenario to test live API</span>
+            </div>
+            <span class="samples-count font-mono text-xs font-semibold text-[#fa5500] bg-orange-50 px-2.5 py-1 rounded-full border border-orange-200">6 Verified Scenarios</span>
+          </div>
+
+          <div class="samples-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-3" role="list">
+            <!-- Sample 1: Benign Banking Notification (SAFE) -->
+            <button type="button" class="sample-card risk-border-safe p-3 rounded-xl text-left transition-all group" data-sample-id="bank_safe" role="listitem">
+              <div class="sample-top flex items-center justify-between mb-1">
+                <span class="sample-name text-xs font-bold text-gray-800 truncate">HDFC Credit</span>
+                <span class="sample-badge badge-safe font-mono text-[10px] font-bold px-1.5 py-0.5 rounded">SAFE</span>
+              </div>
+              <div class="sample-snippet font-mono text-[11px] text-gray-500 line-clamp-2">"Your HDFC Bank account XX4102 has been credited with Rs 5,000.00..."</div>
+            </button>
+
+            <!-- Sample 2: Genuine Delivery Notification (SAFE) -->
+            <button type="button" class="sample-card risk-border-safe p-3 rounded-xl text-left transition-all group" data-sample-id="delivery_safe" role="listitem">
+              <div class="sample-top flex items-center justify-between mb-1">
+                <span class="sample-name text-xs font-bold text-gray-800 truncate">Amazon Delivery</span>
+                <span class="sample-badge badge-safe font-mono text-[10px] font-bold px-1.5 py-0.5 rounded">SAFE</span>
+              </div>
+              <div class="sample-snippet font-mono text-[11px] text-gray-500 line-clamp-2">"Your Amazon package with tracking ID 402-9182391 is out for delivery..."</div>
+            </button>
+
+            <!-- Sample 3: OTP Security Warning (SAFE) -->
+            <button type="button" class="sample-card risk-border-safe p-3 rounded-xl text-left transition-all group" data-sample-id="otp_warning" role="listitem">
+              <div class="sample-top flex items-center justify-between mb-1">
+                <span class="sample-name text-xs font-bold text-gray-800 truncate">Netflix OTP</span>
+                <span class="sample-badge badge-safe font-mono text-[10px] font-bold px-1.5 py-0.5 rounded">SAFE</span>
+              </div>
+              <div class="sample-snippet font-mono text-[11px] text-gray-500 line-clamp-2">"Your Netflix login code is 492018. Do not share this OTP with anyone..."</div>
+            </button>
+
+            <!-- Sample 4: Suspicious Shortened Link (SUSPICIOUS) -->
+            <button type="button" class="sample-card risk-border-suspicious p-3 rounded-xl text-left transition-all group" data-sample-id="shortlink_suspicious" role="listitem">
+              <div class="sample-top flex items-center justify-between mb-1">
+                <span class="sample-name text-xs font-bold text-gray-800 truncate">Shortlink Trap</span>
+                <span class="sample-badge badge-suspicious font-mono text-[10px] font-bold px-1.5 py-0.5 rounded">SUSP</span>
+              </div>
+              <div class="sample-snippet font-mono text-[11px] text-gray-500 line-clamp-2">"Your package delivery could not be completed. Confirm address at bit.ly/..."</div>
+            </button>
+
+            <!-- Sample 5: KYC Phishing (SCAM) -->
+            <button type="button" class="sample-card risk-border-scam p-3 rounded-xl text-left transition-all group" data-sample-id="kyc_phishing" role="listitem">
+              <div class="sample-top flex items-center justify-between mb-1">
+                <span class="sample-name text-xs font-bold text-gray-900 truncate">SBI KYC Phishing</span>
+                <span class="sample-badge badge-scam font-mono text-[10px] font-bold px-1.5 py-0.5 rounded">SCAM</span>
+              </div>
+              <div class="sample-snippet font-mono text-[11px] text-gray-600 line-clamp-2">"URGENT: Your SBI netbanking will be blocked today due to pending KYC..."</div>
+            </button>
+
+            <!-- Sample 6: QR Refund Scam (SCAM) -->
+            <button type="button" class="sample-card risk-border-scam p-3 rounded-xl text-left transition-all group" data-sample-id="qr_refund_scam" role="listitem">
+              <div class="sample-top flex items-center justify-between mb-1">
+                <span class="sample-name text-xs font-bold text-gray-900 truncate">PhonePe QR Scam</span>
+                <span class="sample-badge badge-scam font-mono text-[10px] font-bold px-1.5 py-0.5 rounded">SCAM</span>
+              </div>
+              <div class="sample-snippet font-mono text-[11px] text-gray-600 line-clamp-2">"Scan this QR code in PhonePe to receive refund of Rs 1,450 directly..."</div>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Main 2-Column Grid: Form & Results -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+          <!-- LEFT COLUMN: Input Form -->
+          <div class="input-sidebar-column lg:col-span-6">
+            <section class="card input-card rounded-2xl p-6 space-y-4" aria-labelledby="input-panel-heading">
+              <h2 id="input-panel-heading" class="sr-only">Message Input &amp; Analysis Controls</h2>
+
+              <form id="analyze-form" novalidate>
+                <!-- Label Row & Action Toolbar -->
+                <div class="form-group space-y-2">
+                  <div class="label-row flex items-center justify-between">
+                    <label for="message-input" class="field-label text-xs font-bold uppercase tracking-wider text-gray-700">SMS / Message Content</label>
+                    <div class="input-toolbar flex items-center gap-2">
+                      <button type="button" id="btn-paste" class="btn-tool text-xs text-[#fa5500] hover:text-[#c43800] font-semibold px-2.5 py-1 rounded bg-orange-50 border border-orange-200" title="Paste text from clipboard">
+                        <span>Paste</span>
+                      </button>
+                      <button type="button" id="btn-clear" class="btn-tool text-xs text-gray-600 hover:text-gray-900 px-2.5 py-1 rounded bg-gray-100" title="Clear message input">
+                        <span>Clear</span>
+                      </button>
+                      <span id="char-counter" class="char-counter font-mono text-xs text-gray-400" aria-live="polite">0/2000</span>
+                    </div>
+                  </div>
+
+                  <!-- Textarea -->
+                  <textarea
+                    id="message-input"
+                    name="message"
+                    class="field-textarea font-sans w-full rounded-xl p-3.5 text-sm text-gray-900 leading-relaxed outline-none resize-none"
+                    rows="5"
+                    maxlength="2000"
+                    required
+                    aria-label="Message to analyze"
+                    placeholder="Paste suspicious SMS, WhatsApp message, or bank notice here..."></textarea>
+                  <div id="message-validation-error" class="field-error-text text-xs text-red-600 font-medium" role="alert" aria-live="assertive"></div>
                 </div>
-              </div>
-              <div class="skeleton-chips mt-6">
-                <div class="skeleton-line w-28 h-8 pulse-skeleton rounded-full"></div>
-                <div class="skeleton-line w-36 h-8 pulse-skeleton rounded-full ml-2"></div>
-                <div class="skeleton-line w-24 h-8 pulse-skeleton rounded-full ml-2"></div>
-              </div>
-              <div class="skeleton-card mt-6">
-                <div class="skeleton-line w-full h-16 pulse-skeleton"></div>
-                <div class="skeleton-line w-full h-20 pulse-skeleton mt-3"></div>
-              </div>
-            </div>
 
-            <!-- 3. ACTIVE RESULTS VIEW (Post Analysis) -->
-            <div id="active-results" class="active-results-view hidden">
+                <!-- Sender ID Input (Optional) -->
+                <div class="form-group mt-4 space-y-1.5">
+                  <div class="label-row flex items-center justify-between">
+                    <label for="sender-input" class="field-label text-xs font-semibold text-gray-600 uppercase tracking-wider">Sender ID (optional)</label>
+                    <span class="sender-info-tag text-[11px] text-gray-400 font-mono">Header / Phone</span>
+                  </div>
+                  <input
+                    type="text"
+                    id="sender-input"
+                    name="sender_id"
+                    class="field-input font-mono w-full rounded-xl px-4 py-2.5 text-sm text-gray-900 outline-none"
+                    maxlength="15"
+                    placeholder="e.g., VK-SBIBNK, +919876543210, AMAZON"
+                    aria-describedby="sender-hint">
+                  <p id="sender-hint" class="field-hint text-[11px] text-gray-500">Evaluates telecom alphanumeric sender tags, personal MSISDN mismatches, and authority impersonation.</p>
+                </div>
 
-              <!-- HERO: SVG Circular Progress Risk Gauge -->
-              <div class="gauge-hero-container">
-                <div
-                  id="gauge-wrapper"
-                  class="gauge-wrapper"
-                  role="img"
-                  aria-label="Risk score: 0 out of 100. Analysis pending.">
+                <!-- Analyze Button with Subex Styling -->
+                <div class="mt-6">
+                  <button type="submit" id="analyze-btn" class="btn-analyze btn-subex-pill w-full text-sm font-bold justify-center py-3.5 shadow-lg">
+                    <span class="btn-scanline-sweep" aria-hidden="true"></span>
+                    <span id="btn-spinner" class="spinner-icon hidden" aria-hidden="true"></span>
+                    <span id="btn-label" class="btn-label-text">Analyze Message</span>
+                  </button>
+                </div>
+              </form>
+            </section>
+          </div>
 
-                  <!-- 180px SVG Progress Ring (12px stroke) -->
-                  <svg class="gauge-svg" width="180" height="180" viewBox="0 0 180 180" aria-hidden="true">
-                    <!-- Background Track -->
-                    <circle
-                      class="gauge-track"
-                      cx="90"
-                      cy="90"
-                      r="78"
-                      stroke-width="12" />
-                    <!-- Animated Indicator Progress Ring -->
-                    <circle
-                      id="gauge-progress"
-                      class="gauge-progress-circle"
-                      cx="90"
-                      cy="90"
-                      r="78"
-                      stroke-width="12"
-                      stroke-dasharray="490.09"
-                      stroke-dashoffset="490.09" />
+          <!-- RIGHT COLUMN: Results Section -->
+          <div class="results-column lg:col-span-6">
+            <section
+              id="results-container"
+              class="card results-card rounded-2xl p-6 space-y-6"
+              aria-labelledby="results-heading"
+              aria-live="polite"
+              aria-atomic="true">
+
+              <div class="results-card-header flex items-center justify-between pb-3 border-b border-gray-100">
+                <h2 id="results-heading" class="results-heading text-xs font-bold uppercase tracking-wider text-gray-600 font-mono" tabindex="-1">Threat Intelligence Result</h2>
+                <span id="results-advisory-pill" class="advisory-pill font-mono text-[10px] font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded">ADVISORY ANALYSIS</span>
+              </div>
+
+              <!-- 1. EMPTY STATE -->
+              <div id="empty-state" class="empty-state-view py-8 text-center space-y-4">
+                <div class="empty-icon-wrap w-16 h-16 rounded-2xl bg-orange-50/80 border border-orange-200 text-[#fa5500] mx-auto flex items-center justify-center shadow-inner" aria-hidden="true">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
                   </svg>
-
-                  <!-- Center Score Overlay -->
-                  <div class="gauge-center-content">
-                    <div class="gauge-score-row">
-                      <span id="gauge-score-num" class="gauge-score-value font-mono">0</span>
-                      <span class="gauge-score-total font-mono">/100</span>
-                    </div>
-                    <div id="gauge-risk-label" class="gauge-risk-tag font-mono">PENDING</div>
-                  </div>
                 </div>
-
-                <!-- Risk Summary & Response Latency Tag -->
-                <div class="gauge-details">
-                  <div class="risk-tier-badge-container">
-                    <span id="risk-category-badge" class="risk-category-badge font-mono">EVALUATING</span>
-                    <span id="risk-tier-sublabel" class="risk-tier-sublabel font-mono">SCORE TIER</span>
-                  </div>
-                  <p id="risk-headline-text" class="risk-headline">Heuristic evaluation complete.</p>
-                  <p id="risk-advisory-statement" class="risk-advisory-statement"></p>
-                  <div class="latency-indicator font-mono" id="latency-tag">
-                    ⚡ Evaluated in <span id="latency-ms">--ms</span>
-                  </div>
+                <h3 class="empty-title text-base font-bold text-gray-900">Ready for In-Memory Analysis</h3>
+                <p class="empty-instruction text-xs text-gray-500 max-w-sm mx-auto">
+                  Paste an SMS or click one of the verified archetypes above to inspect threat indicators.
+                </p>
+                <div class="empty-guidance-box p-3.5 bg-white/70 backdrop-blur-sm rounded-xl border border-gray-200/80 text-left text-xs text-gray-600">
+                  <strong class="text-gray-800">Inspection Checklist:</strong> Evaluates urgency pressure, OTP harvesting, lookalike URLs, shortlink masking, reverse-QR lures, and sender ID mismatch.
                 </div>
               </div>
 
-              <!-- FLAGS DETECTED (Expandable Accordion Chips) -->
-              <div class="section-divider"></div>
-              <div class="flags-section">
-                <div class="section-header-row">
-                  <h3 class="section-subheading">FLAGS DETECTED</h3>
-                  <span id="flags-counter-badge" class="counter-badge font-mono">0 Detected</span>
-                </div>
-
-                <!-- Horizontal Chips Wrap Container -->
-                <div id="flags-chips-wrap" class="flags-chips-container" role="region" aria-label="Detected Threat Flags">
-                  <!-- Dynamically populated chips -->
-                </div>
-
-                <!-- Accordion Card Expanded Details (Only one open at a time) -->
-                <div id="flag-accordion-card" class="flag-accordion-expanded hidden" aria-live="polite">
-                  <div class="accordion-top-bar">
-                    <div class="accordion-title-wrap">
-                      <span id="accordion-rule-name" class="accordion-rule-title font-mono">Rule Title</span>
-                      <span id="accordion-severity-badge" class="severity-badge font-mono">High</span>
-                    </div>
-                    <button type="button" id="accordion-close-btn" class="accordion-close-btn" aria-label="Collapse flag details">✕</button>
+              <!-- 2. SKELETON LOADER -->
+              <div id="loading-skeleton" class="skeleton-view hidden py-8 space-y-4" aria-hidden="true">
+                <div class="flex items-center gap-4">
+                  <div class="w-20 h-20 rounded-full bg-gray-200/80 animate-pulse"></div>
+                  <div class="space-y-2 flex-1">
+                    <div class="h-4 bg-gray-200/80 rounded animate-pulse w-3/4"></div>
+                    <div class="h-3 bg-gray-200/80 rounded animate-pulse w-1/2"></div>
                   </div>
-
-                  <!-- Matched Text Snippet Block -->
-                  <div class="accordion-matched-block mt-3">
-                    <div class="matched-label">Matched Trigger Text:</div>
-                    <div id="accordion-matched-text" class="matched-text-display font-mono"></div>
-                  </div>
-
-                  <!-- Explanation -->
-                  <p id="accordion-rule-explanation" class="accordion-explanation mt-3"></p>
                 </div>
+                <div class="h-16 bg-gray-100/80 rounded-xl animate-pulse"></div>
               </div>
 
-              <!-- EXPLANATION + RECOMMENDED ACTION PANEL -->
-              <div class="section-divider"></div>
-              <div class="explanation-section">
-                <h3 class="section-subheading">ANALYSIS &amp; FINDINGS</h3>
-                <p id="analysis-explanation-text" class="explanation-paragraph"></p>
+              <!-- 3. ACTIVE RESULTS VIEW -->
+              <div id="active-results" class="active-results-view hidden space-y-6">
 
-                <!-- Recommended Action Callout Box (3px solid accent left border) -->
-                <div class="recommended-action-box mt-4">
-                  <div class="action-box-header">
-                    <svg class="action-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                      <path d="m9 12 2 2 4-4"/>
+                <!-- HERO: SVG Circular Progress Risk Gauge -->
+                <div class="gauge-hero-container flex items-center gap-6 pb-6 border-b border-gray-100">
+                  <div
+                    id="gauge-wrapper"
+                    class="gauge-wrapper relative w-28 h-28 flex items-center justify-center shrink-0"
+                    role="img"
+                    aria-label="Risk score: 0 out of 100. Analysis pending.">
+
+                    <!-- 180px SVG Progress Ring -->
+                    <svg class="gauge-svg w-full h-full -rotate-90" viewBox="0 0 180 180" aria-hidden="true">
+                      <circle class="gauge-track" cx="90" cy="90" r="78" fill="none" stroke="#e5e7eb" stroke-width="12" />
+                      <circle
+                        id="gauge-progress"
+                        class="gauge-progress-circle transition-all duration-700"
+                        cx="90"
+                        cy="90"
+                        r="78"
+                        fill="none"
+                        stroke="#fa5500"
+                        stroke-width="12"
+                        stroke-dasharray="490.09"
+                        stroke-dashoffset="490.09"
+                        stroke-linecap="round" />
                     </svg>
-                    <span class="action-box-label">RECOMMENDED ACTION</span>
-                  </div>
-                  <p id="recommended-action-content" class="action-box-text"></p>
-                </div>
-              </div>
 
-              <!-- MESSAGE PREVIEW (WITH HIGHLIGHTING & FILTER TOGGLE) -->
-              <div class="section-divider"></div>
-              <div class="preview-section">
-                <div class="preview-header-row">
-                  <h3 class="section-subheading">MESSAGE PREVIEW (IN-CONTEXT TRIGGERS)</h3>
-                  
-                  <!-- Segmented Filter Toggle -->
-                  <div class="preview-toggle-group" role="radiogroup" aria-label="Message Preview Display Mode">
-                    <button
-                      type="button"
-                      id="toggle-show-all"
-                      class="toggle-btn active font-mono"
-                      role="radio"
-                      aria-checked="true">
-                      Show original
-                    </button>
-                    <button
-                      type="button"
-                      id="toggle-show-flagged"
-                      class="toggle-btn font-mono"
-                      role="radio"
-                      aria-checked="false">
-                      Show flagged only
-                    </button>
+                    <!-- Center Score Overlay -->
+                    <div class="gauge-center-content absolute inset-0 flex flex-col items-center justify-center">
+                      <div class="gauge-score-row flex items-baseline">
+                        <span id="gauge-score-num" class="gauge-score-value font-mono text-3xl font-extrabold text-gray-900">0</span>
+                        <span class="gauge-score-total font-mono text-xs text-gray-500">/100</span>
+                      </div>
+                      <div id="gauge-risk-label" class="gauge-risk-tag font-mono text-[9px] font-bold tracking-widest uppercase text-gray-500">PENDING</div>
+                    </div>
+                  </div>
+
+                  <!-- Risk Summary & Response Latency Tag -->
+                  <div class="gauge-details space-y-1">
+                    <div class="risk-tier-badge-container flex items-center gap-2">
+                      <span id="risk-category-badge" class="risk-category-badge font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-800">EVALUATING</span>
+                      <span id="risk-tier-sublabel" class="risk-tier-sublabel font-mono text-[10px] text-gray-400">SCORE TIER</span>
+                    </div>
+                    <p id="risk-headline-text" class="risk-headline text-sm font-bold text-gray-900">Heuristic evaluation complete.</p>
+                    <p id="risk-advisory-statement" class="risk-advisory-statement text-xs text-gray-600 leading-relaxed"></p>
+                    <div class="latency-indicator font-mono text-[11px] text-emerald-600 font-semibold pt-1" id="latency-tag">
+                      ⚡ Evaluated in <span id="latency-ms">--ms</span>
+                    </div>
                   </div>
                 </div>
 
-                <!-- Highlighted Message Monospace Block -->
-                <div id="message-preview-container" class="message-preview-box font-mono" aria-label="Analyzed message with highlighted detection triggers">
-                  <!-- Highlighted content dynamically inserted here via safe DOM TextNodes -->
+                <!-- FLAGS DETECTED (Expandable Accordion Chips) -->
+                <div class="flags-section space-y-2">
+                  <div class="section-header-row flex items-center justify-between">
+                    <h3 class="section-subheading text-xs font-bold uppercase tracking-wider text-gray-600">FLAGS DETECTED</h3>
+                    <span id="flags-counter-badge" class="counter-badge font-mono text-xs text-[#fa5500] font-semibold">0 Detected</span>
+                  </div>
+
+                  <div id="flags-chips-wrap" class="flags-chips-wrap flags-chips-container flex flex-wrap gap-1.5" role="region" aria-label="Detected Threat Flags">
+                    <!-- Dynamically populated chips -->
+                  </div>
+
+                  <!-- Accordion Card Expanded Details -->
+                  <div id="flag-accordion-card" class="flag-accordion-expanded hidden p-3.5 rounded-xl border text-xs space-y-2" aria-live="polite">
+                    <div class="accordion-top-bar flex items-center justify-between pb-2 border-b border-gray-200">
+                      <div class="accordion-title-wrap flex items-center gap-2">
+                        <span id="accordion-rule-name" class="accordion-rule-title font-mono font-bold text-gray-900">Rule Title</span>
+                        <span id="accordion-severity-badge" class="severity-badge font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-orange-100 text-[#fa5500]">High</span>
+                      </div>
+                      <button type="button" id="accordion-close-btn" class="accordion-close-btn text-gray-400 hover:text-gray-900" aria-label="Collapse flag details">✕</button>
+                    </div>
+
+                    <div class="accordion-matched-block">
+                      <div class="matched-label text-[11px] font-semibold text-gray-500">Matched Trigger Text:</div>
+                      <div id="accordion-matched-text" class="matched-text-display font-mono text-xs text-red-600 bg-red-50/80 p-2 rounded border border-red-200 mt-1"></div>
+                    </div>
+
+                    <p id="accordion-rule-explanation" class="accordion-explanation text-xs text-gray-600 leading-relaxed"></p>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Advisory Notice Banner -->
-              <div class="advisory-footer-note mt-6">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <circle cx="12" cy="12" r="10"/>
-                  <line x1="12" y1="16" x2="12" y2="12"/>
-                  <line x1="12" y1="8" x2="12.01" y2="8"/>
-                </svg>
-                <span><strong>Advisory Disclaimer:</strong> ScamShield provides deterministic risk analysis to assist users in identifying fraud indicators. It does not replace personal vigilance or verification through official institutional channels.</span>
-              </div>
+                <!-- EXPLANATION + RECOMMENDED ACTION PANEL -->
+                <div class="explanation-section space-y-3 pt-3 border-t border-gray-100">
+                  <h3 class="section-subheading text-xs font-bold uppercase tracking-wider text-gray-600">ANALYSIS &amp; FINDINGS</h3>
+                  <p id="analysis-explanation-text" class="explanation-paragraph text-xs text-gray-700 leading-relaxed"></p>
 
-            </div>
-          </section>
+                  <!-- Recommended Action Callout Box -->
+                  <div class="recommended-action-box p-4 rounded-xl bg-orange-50/70 border border-orange-200/90 space-y-1">
+                    <div class="action-box-header flex items-center gap-2 text-xs font-bold text-[#fa5500] uppercase tracking-wide">
+                      <svg class="action-icon w-4 h-4 text-[#fa5500]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="m9 12 2 2 4-4"/>
+                      </svg>
+                      <span class="action-box-label">RECOMMENDED ACTION</span>
+                    </div>
+                    <p id="recommended-action-content" class="action-box-text text-xs text-gray-800 leading-relaxed font-medium"></p>
+                  </div>
+                </div>
+
+                <!-- MESSAGE PREVIEW (WITH HIGHLIGHTING & FILTER TOGGLE) -->
+                <div class="preview-section space-y-2 pt-3 border-t border-gray-100">
+                  <div class="preview-header-row flex items-center justify-between">
+                    <h3 class="section-subheading text-xs font-bold uppercase tracking-wider text-gray-600">MESSAGE PREVIEW</h3>
+                    
+                    <div class="preview-toggle-group flex items-center gap-1 bg-gray-100/80 p-0.5 rounded-lg text-[11px]" role="radiogroup" aria-label="Message Preview Display Mode">
+                      <button type="button" id="toggle-show-all" class="toggle-btn active font-mono px-2 py-1 rounded text-gray-900 font-semibold shadow-xs" role="radio" aria-checked="true">Show original</button>
+                      <button type="button" id="toggle-show-flagged" class="toggle-btn font-mono px-2 py-1 rounded text-gray-500 hover:text-gray-900" role="radio" aria-checked="false">Show flagged only</button>
+                    </div>
+                  </div>
+
+                  <div id="message-preview-container" class="message-preview-container message-preview-box font-mono text-xs bg-white/70 p-3.5 rounded-xl border border-gray-200/80 text-gray-800 leading-relaxed" aria-label="Analyzed message with highlighted detection triggers"></div>
+                </div>
+
+                <!-- Advisory Notice Banner -->
+                <div class="advisory-footer-note text-[11px] text-gray-500 bg-white/60 p-3 rounded-xl border border-gray-200/80 flex items-start gap-2">
+                  <svg class="w-4 h-4 text-gray-400 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                  <span><strong>Advisory Disclaimer:</strong> ScamShield provides deterministic risk scoring to assist users in recognizing fraud indicators. It does not replace personal vigilance or verification via official institutional channels.</span>
+                </div>
+
+              </div>
+            </section>
+          </div>
 
         </div>
 
       </div>
+    </div>
 
-      <!-- ============================================================================
-           5. HOW IT WORKS SECTION
-           ============================================================================ -->
-      <section class="info-section mt-10" aria-labelledby="how-it-works-heading">
-        <div class="section-title-wrap">
-          <span class="section-pill font-mono">ARCHITECTURE</span>
-          <h2 id="how-it-works-heading" class="info-section-title">How ScamShield Works</h2>
-          <p class="info-section-desc">Deterministic, transparent pattern analysis engineered for sub-millisecond evaluation without hallucinations or privacy trade-offs.</p>
+    <!-- ============================================================================
+         SUBEX "OUR SOLUTIONS" SECTION (3D Amber Icons & Glass Cards)
+         ============================================================================ -->
+    <section id="solutions" class="py-24 px-6 bg-white relative">
+      <div class="max-w-7xl mx-auto space-y-20 relative z-10">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-[#0f1115] tracking-tight">
+            Our Solutions
+          </h2>
+          <p class="text-base text-gray-600">
+            AI-powered solutions built to predict, prevent, and perform.
+          </p>
         </div>
 
-        <div class="steps-grid">
+        <!-- Solution 1: Fraud Management (with 3D Amber Glass Shield Icon) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div class="lg:col-span-7 space-y-6">
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-[#fa5500] tracking-tight">
+              Fraud Management
+            </h3>
+            <p class="text-gray-600 text-base leading-relaxed">
+              ScamShield empowers telecommunications providers and end users to anticipate and eliminate fraudulent intent before it impacts business. Our AI-powered fraud management system continuously learns and adapts, identifying both known and emerging threats in real time.
+            </p>
+            <p class="text-gray-600 text-base leading-relaxed">
+              By combining deep-domain expertise with advanced analytics, ScamShield safeguards every digital journey, ensuring your network remains fearless, seamless, and fraud-free.
+            </p>
+            <div>
+              <a href="#analyze-form" class="btn-subex-pill text-sm">
+                <span>Explore Heuristics</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 3D Amber Shield Graphic -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-64 h-64 flex items-center justify-center">
+              <div class="absolute inset-4 rounded-full border border-orange-200/80 animate-spin" style="animation-duration: 30s;"></div>
+              <div class="absolute inset-10 rounded-full border border-orange-300/60"></div>
+              
+              <svg class="w-44 h-44 relative z-10 filter drop-shadow-[0_15px_30px_rgba(250,85,0,0.3)]" viewBox="0 0 100 120" fill="none">
+                <path d="M50 8 L85 24 C85 68 50 108 50 108 C50 108 15 68 15 24 Z" fill="url(#subexGrad1)" stroke="#ffa366" stroke-width="2"/>
+                <path d="M50 15 L78 28 C78 64 50 96 50 96 C50 96 22 64 22 28 Z" fill="url(#glassGlare)"/>
+                <polygon points="50,38 66,72 34,72" fill="#ffffff" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.2))"/>
+                <rect x="48" y="46" width="4" height="14" rx="2" fill="#c43800"/>
+                <circle cx="50" cy="66" r="2.5" fill="#c43800"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Solution 2: Business Assurance (with 3D Server / Vault Icon) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-8">
+          <div class="lg:col-span-5 flex justify-center order-2 lg:order-1">
+            <div class="relative w-64 h-64 flex items-center justify-center">
+              <div class="absolute inset-6 rounded-full border border-orange-200"></div>
+              
+              <svg class="w-44 h-44 relative z-10 filter drop-shadow-[0_15px_30px_rgba(250,85,0,0.3)]" viewBox="0 0 120 120" fill="none">
+                <ellipse cx="60" cy="85" rx="40" ry="14" fill="#a82800"/>
+                <path d="M20 75 C20 83 38 90 60 90 C82 90 100 83 100 75 L100 85 C100 93 82 100 60 100 C38 100 20 93 20 85 Z" fill="url(#subexGrad1)"/>
+                <ellipse cx="60" cy="75" rx="40" ry="14" fill="#fa5500" stroke="#ffb076" stroke-width="1.5"/>
+                
+                <path d="M20 55 C20 63 38 70 60 70 C82 70 100 63 100 55 L100 65 C100 73 82 80 60 80 C38 80 20 73 20 65 Z" fill="url(#subexGrad1)"/>
+                <ellipse cx="60" cy="55" rx="40" ry="14" fill="#ff701e" stroke="#ffb076" stroke-width="1.5"/>
+
+                <path d="M20 35 C20 43 38 50 60 50 C82 50 100 43 100 35 L100 45 C100 53 82 60 60 60 C38 60 20 53 20 45 Z" fill="url(#subexGrad1)"/>
+                <ellipse cx="60" cy="35" rx="40" ry="14" fill="#ff8a3d" stroke="#ffffff" stroke-width="2"/>
+                <path d="M60 24 L70 29 C70 42 60 50 60 50 C60 50 50 42 50 29 Z" fill="#ffffff" opacity="0.9"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="lg:col-span-7 space-y-6 order-1 lg:order-2">
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-[#fa5500] tracking-tight">
+              Business Assurance
+            </h3>
+            <p class="text-gray-600 text-base leading-relaxed">
+              ScamShield's business assurance solutions ensure that every legitimate notification is delivered, accredited, and trusted. Through AI-driven automation, they eliminate fraud leakages, reconcile complex SMS sender routes, and deliver 360-degree visibility across the communication chain.
+            </p>
+            <p class="text-gray-600 text-base leading-relaxed">
+              With continuous, real-time validation and actionable insights, ScamShield enables operators to strengthen financial integrity while accelerating growth.
+            </p>
+            <div>
+              <a href="#compliance" class="btn-subex-pill text-sm">
+                <span>View Compliance</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================================
+         5. HOW IT WORKS SECTION (Subex Fearless Architecture Glass Cards)
+         ============================================================================ -->
+    <section class="info-section py-20 px-6 bg-[#fbfbfc] border-t border-gray-100" aria-labelledby="how-it-works-heading">
+      <div class="max-w-7xl mx-auto space-y-12">
+        <div class="section-title-wrap max-w-3xl space-y-3">
+          <span class="section-pill font-mono text-xs font-bold text-[#fa5500] uppercase tracking-widest">FEARLESS ARCHITECTURE</span>
+          <h2 id="how-it-works-heading" class="info-section-title text-3xl sm:text-4xl font-extrabold text-[#0f1115] tracking-tight">
+            How ScamShield Works
+          </h2>
+          <p class="info-section-desc text-base text-gray-600">Deterministic, transparent pattern analysis engineered for sub-millisecond evaluation without hallucinations or privacy trade-offs.</p>
+        </div>
+
+        <div class="steps-grid grid grid-cols-1 md:grid-cols-3 gap-6">
           <!-- Step 1 -->
-          <div class="step-card">
-            <div class="step-num font-mono">01</div>
-            <h3 class="step-title">Message Ingestion &amp; Header Check</h3>
-            <p class="step-text">
+          <div class="step-card p-7 rounded-2xl space-y-3">
+            <div class="step-num font-mono text-2xl font-extrabold text-[#fa5500]">01</div>
+            <h3 class="step-title text-lg font-bold text-gray-900">Message Ingestion &amp; Header Check</h3>
+            <p class="step-text text-xs text-gray-600 leading-relaxed">
               The engine sanitizes the message text in memory and inspects sender ID headers for telecom conformity, shortcode status, or suspicious personal 10-digit numbers posing as official institutions.
             </p>
           </div>
 
           <!-- Step 2 -->
-          <div class="step-card">
-            <div class="step-num font-mono">02</div>
-            <h3 class="step-title">12 Deterministic Fraud Families</h3>
-            <p class="step-text">
+          <div class="step-card p-7 rounded-2xl space-y-3">
+            <div class="step-num font-mono text-2xl font-extrabold text-[#fa5500]">02</div>
+            <h3 class="step-title text-lg font-bold text-gray-900">12 Deterministic Fraud Families</h3>
+            <p class="step-text text-xs text-gray-600 leading-relaxed">
               Applies word-boundary regex engines to detect credential harvesting, artificial urgency, lookalike URLs, shortlink masking, utility disconnection threats, and reverse QR payment scams.
             </p>
           </div>
 
           <!-- Step 3 -->
-          <div class="step-card">
-            <div class="step-num font-mono">03</div>
-            <h3 class="step-title">Calibrated Scoring &amp; Guidance</h3>
-            <p class="step-text">
+          <div class="step-card p-7 rounded-2xl space-y-3">
+            <div class="step-num font-mono text-2xl font-extrabold text-[#fa5500]">03</div>
+            <h3 class="step-title text-lg font-bold text-gray-900">Calibrated Scoring &amp; Guidance</h3>
+            <p class="step-text text-xs text-gray-600 leading-relaxed">
               Combines independent rule families using severity weights into a 0–100 risk score mapped to SAFE, SUSPICIOUS, or SCAM, accompanied by concrete safety actions and highlighted triggers.
             </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ============================================================================
-           6. SAFETY TIPS SECTION
-           ============================================================================ -->
-      <section class="info-section mt-10" aria-labelledby="safety-tips-heading">
-        <div class="section-title-wrap">
-          <span class="section-pill font-mono">DEFENSE GUIDE</span>
-          <h2 id="safety-tips-heading" class="info-section-title">Practical SMS Scam Defense Tips</h2>
-          <p class="info-section-desc">Key principles to protect yourself from modern smishing and financial fraud campaigns.</p>
+    <!-- ============================================================================
+         6. SAFETY TIPS SECTION (Glass Cards)
+         ============================================================================ -->
+    <section class="info-section py-20 px-6 bg-white border-t border-gray-100" aria-labelledby="safety-tips-heading">
+      <div class="max-w-7xl mx-auto space-y-12">
+        <div class="section-title-wrap max-w-3xl space-y-3">
+          <span class="section-pill font-mono text-xs font-bold text-[#fa5500] uppercase tracking-widest">DEFENSE GUIDE</span>
+          <h2 id="safety-tips-heading" class="info-section-title text-3xl sm:text-4xl font-extrabold text-[#0f1115] tracking-tight">
+            Practical SMS Scam Defense Tips
+          </h2>
+          <p class="info-section-desc text-base text-gray-600">Key principles to protect yourself from modern smishing and financial fraud campaigns.</p>
         </div>
 
-        <div class="tips-grid">
+        <div class="tips-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Tip 1 -->
-          <div class="tip-card">
-            <div class="tip-icon-wrap" aria-hidden="true">
+          <div class="tip-card p-6 rounded-2xl space-y-3">
+            <div class="tip-icon-wrap w-10 h-10 rounded-xl bg-orange-100/80 text-[#fa5500] flex items-center justify-center font-bold" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
             </div>
-            <h3 class="tip-title">Never Share OTPs or PINs</h3>
-            <p class="tip-text">
+            <h3 class="tip-title text-sm font-bold text-gray-900">Never Share OTPs or PINs</h3>
+            <p class="tip-text text-xs text-gray-600 leading-relaxed">
               Legitimate banks, delivery services, and government departments will never ask you to disclose verification codes, passwords, or netbanking credentials over phone or SMS.
             </p>
           </div>
 
           <!-- Tip 2 -->
-          <div class="tip-card">
-            <div class="tip-icon-wrap" aria-hidden="true">
+          <div class="tip-card p-6 rounded-2xl space-y-3">
+            <div class="tip-icon-wrap w-10 h-10 rounded-xl bg-orange-100/80 text-[#fa5500] flex items-center justify-center font-bold" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
             </div>
-            <h3 class="tip-title">Beware of Personal Mobile Senders</h3>
-            <p class="tip-text">
+            <h3 class="tip-title text-sm font-bold text-gray-900">Beware Personal Mobile Senders</h3>
+            <p class="tip-text text-xs text-gray-600 leading-relaxed">
               Official notices from banks, electricity boards, and telecom authorities originate from registered alphanumeric sender IDs (e.g. VK-HDFCBK), never from personal 10-digit mobile numbers.
             </p>
           </div>
 
           <!-- Tip 3 -->
-          <div class="tip-card">
-            <div class="tip-icon-wrap" aria-hidden="true">
+          <div class="tip-card p-6 rounded-2xl space-y-3">
+            <div class="tip-icon-wrap w-10 h-10 rounded-xl bg-orange-100/80 text-[#fa5500] flex items-center justify-center font-bold" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="3" width="7" height="7"/>
                 <rect x="14" y="3" width="7" height="7"/>
@@ -559,46 +789,98 @@
                 <rect x="3" y="14" width="7" height="7"/>
               </svg>
             </div>
-            <h3 class="tip-title">QR Codes Only Pay Money</h3>
-            <p class="tip-text">
+            <h3 class="tip-title text-sm font-bold text-gray-900">QR Codes Only Pay Money</h3>
+            <p class="tip-text text-xs text-gray-600 leading-relaxed">
               Scanning a QR code or entering your UPI PIN always deducts funds from your bank account. You never need to scan a QR code or enter a PIN to receive a payment or refund.
             </p>
           </div>
 
           <!-- Tip 4 -->
-          <div class="tip-card">
-            <div class="tip-icon-wrap" aria-hidden="true">
+          <div class="tip-card p-6 rounded-2xl space-y-3">
+            <div class="tip-icon-wrap w-10 h-10 rounded-xl bg-orange-100/80 text-[#fa5500] flex items-center justify-center font-bold" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="10"/>
                 <line x1="2" y1="12" x2="22" y2="12"/>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
               </svg>
             </div>
-            <h3 class="tip-title">Verify via Official Portals</h3>
-            <p class="tip-text">
+            <h3 class="tip-title text-sm font-bold text-gray-900">Verify via Official Portals</h3>
+            <p class="tip-text text-xs text-gray-600 leading-relaxed">
               If an SMS claims your electricity, SIM, or bank account will be blocked, navigate independently to the official app or portal. Never call numbers or click links provided inside the text.
             </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </div>
   </main>
 
   <!-- ==============================================================================
-       7. FOOTER
+       7. FOOTER (Subex Clean High-Contrast Footer & Real Clickable Links)
        ============================================================================== -->
-  <footer class="app-footer" role="contentinfo">
-    <div class="footer-inner">
-      <div class="footer-left">
-        <span class="footer-brand font-mono">ScamShield v1.0</span>
-        <span class="footer-separator">&bull;</span>
-        <span>Built with deterministic heuristics &amp; zero message logging.</span>
+  <footer id="compliance" class="app-footer py-16 px-6" role="contentinfo">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 text-xs">
+      
+      <!-- Left: Office Selector & Emergency Helpline -->
+      <div class="md:col-span-4 space-y-4">
+        <span class="footer-col-title">Our Operations</span>
+        <select class="footer-operations-select" aria-label="Select Operations Lab Location">
+          <option>India: ScamShield Intelligence Lab, Bengaluru</option>
+          <option>North America: Threat Research Center</option>
+          <option>UK &amp; Europe: Regulatory Compliance Node</option>
+        </select>
+        <div class="text-gray-600 text-xs space-y-1.5 pt-2 leading-relaxed">
+          <p class="font-bold text-gray-900">ScamShield Global Operations</p>
+          <p>Outer Ring Road, Bellandur, Bengaluru, Karnataka 560103</p>
+          <p>National Emergency Cyber Crime Helpline: <a href="tel:1930" class="text-[#fa5500] font-bold hover:underline">1930</a> (<a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="text-gray-800 underline hover:text-[#fa5500]">cybercrime.gov.in</a>)</p>
+        </div>
       </div>
-      <div class="footer-right">
-        <span>Cyber Crime Helpline: <strong>1930</strong> (<a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="footer-link">cybercrime.gov.in</a>)</span>
-        <span class="footer-separator">&bull;</span>
-        <span class="footer-standards">WCAG AA Compliant</span>
+
+      <!-- Center Clickable Links -->
+      <div class="md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div>
+          <span class="footer-col-title">Solutions</span>
+          <a href="#solutions" class="footer-link">Fraud Management</a>
+          <a href="#solutions" class="footer-link">Business Assurance</a>
+          <a href="#how-it-works-heading" class="footer-link">Heuristic Engine</a>
+          <a href="#analyze-form" class="footer-link">Live Threat Scanner</a>
+        </div>
+
+        <div>
+          <span class="footer-col-title">Compliance</span>
+          <a href="https://trai.gov.in" target="_blank" rel="noopener noreferrer" class="footer-link">TRAI TCCCPR Registry</a>
+          <a href="https://www.meity.gov.in" target="_blank" rel="noopener noreferrer" class="footer-link">DPDP Act (India)</a>
+          <a href="#compliance" class="footer-link">WCAG AA Compliant</a>
+          <a href="/health" target="_blank" class="footer-link font-mono text-[11px]">API Health Probe</a>
+        </div>
+
+        <div>
+          <span class="footer-col-title">Emergency</span>
+          <a href="tel:1930" class="footer-link font-bold text-[#fa5500]">Helpline 1930</a>
+          <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="footer-link">cybercrime.gov.in</a>
+          <a href="https://cybercrime.gov.in/Webform/Accept.aspx" target="_blank" rel="noopener noreferrer" class="footer-link">Report Financial Fraud</a>
+          <a href="#safety-tips-heading" class="footer-link">SMS Safety Defense</a>
+        </div>
+
+        <div>
+          <span class="footer-col-title">Engine Telemetry</span>
+          <a href="#hero-heading" class="footer-link text-emerald-600 font-mono font-bold">171 Tests Passing</a>
+          <span class="footer-link font-mono text-gray-500 cursor-default">&lt; 1ms Latency</span>
+          <span class="footer-link font-mono text-gray-500 cursor-default">RAM: Zero Disk Log</span>
+          <a href="/docs" target="_blank" class="footer-link font-mono text-[11px] text-[#fa5500]">OpenAPI /docs</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright Strip with Real Clickable Links -->
+    <div class="max-w-7xl mx-auto footer-bottom-bar">
+      <div>&copy; 2026 ScamShield &amp; Subex. All Rights Reserved. Built with deterministic heuristics &amp; zero message logging.</div>
+      <div class="footer-bottom-links">
+        <a href="#compliance" class="footer-bottom-link">Privacy Policy</a>
+        <a href="#compliance" class="footer-bottom-link">Cookies</a>
+        <a href="#compliance" class="footer-bottom-link">Terms of Service</a>
+        <a href="/docs" target="_blank" class="footer-bottom-link">API Docs</a>
       </div>
     </div>
   </footer>

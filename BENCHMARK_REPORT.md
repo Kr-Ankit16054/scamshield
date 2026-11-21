@@ -9,7 +9,7 @@
 - **False Positive Rate on SAFE**: **0.00%** (0/100 false alarms)
 - **False Negative Rate on SCAM**: **0.00%** (0/75 missed scams)
 - **Overall Threat Miss Rate**: **0.00%**
-- **Average Pipeline Latency**: **0.59 ms** per message (P99: **0.89 ms**)
+- **Average Pipeline Latency**: **0.62 ms** per message (P99: **1.01 ms**)
 
 ---
 
@@ -39,20 +39,20 @@
 | :--- | :---: | :---: | :---: | :---: |
 | **SAFE** | 0 | 5.3 | 0 | 30 |
 | **SUSPICIOUS** | 40 | 40.5 | 40 | 52 |
-| **SCAM** | 72 | 94.1 | 100 | 100 |
+| **SCAM** | 72 | 94.4 | 100 | 100 |
 
 
 ---
 
 ## 4. Latency Profile
-- **Mean Processing Time**: `0.59 ms`
-- **Median (P50) Latency**: `0.61 ms`
-- **90th Percentile (P90)**: `0.76 ms`
-- **95th Percentile (P95)**: `0.85 ms`
-- **99th Percentile (P99)**: `0.89 ms`
-- **Min Latency**: `0.28 ms`
-- **Max Latency**: `0.96 ms`
-- **Total Batch Execution Time**: `0.118 s` for 200 full pipeline analyses
+- **Mean Processing Time**: `0.62 ms`
+- **Median (P50) Latency**: `0.65 ms`
+- **90th Percentile (P90)**: `0.81 ms`
+- **95th Percentile (P95)**: `0.89 ms`
+- **99th Percentile (P99)**: `1.01 ms`
+- **Min Latency**: `0.30 ms`
+- **Max Latency**: `1.15 ms`
+- **Total Batch Execution Time**: `0.125 s` for 200 full pipeline analyses
 
 ---
 
