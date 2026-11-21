@@ -17,7 +17,7 @@ from typing import Annotated
 
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
@@ -44,12 +44,15 @@ logging.basicConfig(
 logger = logging.getLogger("scamshield")
 
 # ==============================================================================
-# ENVIRONMENT & PORT CONFIGURATION (RENDER COMPATIBLE)
+# ENVIRONMENT & CONFIGURATION (RENDER & PRODUCTION COMPATIBLE)
 # ==============================================================================
-HOST = os.environ.get("HOST", "0.0.0.0")
+HOST = os.environ.get("HOST", "0.0.0.0")  # nosec B104
 PORT = int(os.environ.get("PORT", "8000"))
 RATE_LIMIT_PER_MINUTE = os.environ.get("RATE_LIMIT_PER_MINUTE", "30")
 ALLOWED_ORIGINS = os.environ.get("ALLOWED_ORIGINS", "*")
+DOCS_ENABLED = os.environ.get("DOCS_ENABLED", "true").lower() in ("true", "1", "yes")
+ENABLE_HSTS = os.environ.get("ENABLE_HSTS", "false").lower() in ("true", "1", "yes")
+MAX_REQUEST_BODY_BYTES = 32 * 1024  # 32 KB limit
 
 # ==============================================================================
 # RATE LIMITING & APP INITIALIZATION
@@ -60,8 +63,9 @@ app = FastAPI(
     title="ScamShield API",
     version="1.0.0",
     description="Suspicious Message & Smishing Detector Heuristic Risk Analysis API",
-    docs_url="/docs",
-    redoc_url=None,
+    docs_url="/docs" if DOCS_ENABLED else None,
+    redoc_url="/redoc" if DOCS_ENABLED else None,
+    openapi_url="/openapi.json" if DOCS_ENABLED else None,
 )
 
 app.state.limiter = limiter
@@ -81,11 +85,23 @@ app.add_middleware(
 
 
 # ==============================================================================
-# SECURITY HEADERS & AUDIT MIDDLEWARE
+# SECURITY HEADERS, BODY LIMIT & AUDIT MIDDLEWARE
 # ==============================================================================
 @app.middleware("http")
 async def security_and_audit_middleware(request: Request, call_next):
-    """Adds hardened security headers and logs request metadata without content."""
+    """Enforces 32 KB body limit, adds hardened security headers, and logs metadata only."""
+    # 1. Enforce 32 KB request body limit
+    content_length = request.headers.get("content-length")
+    if content_length:
+        try:
+            if int(content_length) > MAX_REQUEST_BODY_BYTES:
+                return JSONResponse(
+                    status_code=status.HTTP_413_CONTENT_TOO_LARGE,
+                    content={"detail": "Payload too large. Maximum allowed request body size is 32 KB."},
+                )
+        except ValueError:
+            pass
+
     start_time = time.perf_counter()
     response = await call_next(request)
     duration_ms = (time.perf_counter() - start_time) * 1000
@@ -97,19 +113,42 @@ async def security_and_audit_middleware(request: Request, call_next):
         f"-> Status {response.status_code} in {duration_ms:.2f}ms"
     )
 
-    # Security Headers
+    # Hardened Security Headers
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["X-Frame-Options"] = "DENY"
-    response.headers["Content-Security-Policy"] = (
-        "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
-        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; "
-        "font-src 'self' https://fonts.gstatic.com; "
-        "img-src 'self' data: https://fastapi.tiangolo.com; "
-        "connect-src 'self' http://localhost:* http://127.0.0.1:*;"
-    )
-    response.headers["X-XSS-Protection"] = "0"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    response.headers["Cross-Origin-Opener-Policy"] = "same-origin"
+    response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
+    # Modern OWASP best practice: disable legacy buggy XSS auditor in favor of CSP
+    response.headers["X-XSS-Protection"] = "0"
+
+    if ENABLE_HSTS or request.url.scheme == "https":
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+
+    # Context-aware Content Security Policy (strict self-hosted CSP on application, relaxed for Swagger docs)
+    is_docs_route = request.url.path in ("/docs", "/redoc", "/openapi.json")
+    if is_docs_route:
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+            "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; "
+            "img-src 'self' data: https://fastapi.tiangolo.com; "
+            "connect-src 'self'; "
+            "frame-ancestors 'none';"
+        )
+    else:
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self'; "
+            "script-src 'self'; "
+            "style-src 'self'; "
+            "font-src 'self'; "
+            "img-src 'self' data:; "
+            "connect-src 'self'; "
+            "frame-ancestors 'none'; "
+            "base-uri 'self'; "
+            "form-action 'self';"
+        )
 
     return response
 
@@ -117,7 +156,7 @@ async def security_and_audit_middleware(request: Request, call_next):
 # ==============================================================================
 # API ENDPOINTS
 # ==============================================================================
-@app.get("/health", response_model=HealthResponse, tags=["Health"])
+@app.api_route("/health", methods=["GET", "HEAD"], response_model=HealthResponse, tags=["Health"])
 async def health_check() -> HealthResponse:
     """Service health probe endpoint."""
     return HealthResponse(status="ok")
@@ -162,12 +201,14 @@ async def analyze_message(
 # STATIC ASSETS & ROOT ROUTE
 # ==============================================================================
 STATIC_DIR = Path(__file__).resolve().parent / "static"
+if not STATIC_DIR.exists():
+    STATIC_DIR = Path.cwd() / "app" / "static"
 
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 
-@app.get("/", response_class=HTMLResponse, include_in_schema=False)
+@app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse, include_in_schema=False)
 async def serve_index():
     """Serves the ScamShield single-page application."""
     index_file = STATIC_DIR / "index.html"

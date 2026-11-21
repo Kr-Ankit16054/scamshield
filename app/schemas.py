@@ -49,6 +49,11 @@ class AnalyzeRequest(BaseModel):
     def validate_message_not_empty(cls, v: str) -> str:
         if not v.strip():
             raise ValueError("Message cannot be empty or only whitespace.")
+        import re
+        # Reject null bytes and ASCII control characters (excluding standard whitespace \t, \n, \r)
+        # Note: Bidi control characters (\u200e, \u200f, \u202a-\u202e, \u2066-\u2069) are preserved.
+        if re.search(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", v):
+            raise ValueError("Message contains forbidden control characters or null bytes.")
         return v
 
     @field_validator("sender_id")
@@ -60,6 +65,8 @@ class AnalyzeRequest(BaseModel):
         if not v:
             return None
         import re
+        if re.search(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", v):
+            raise ValueError("Sender ID contains forbidden control characters or null bytes.")
         # Sender ID should be an alphanumeric shortcode, phone number, or header (e.g. AX-HDFCBK, +919876543210)
         # Length 2-15 characters, allowing alphanumeric, +, -, _
         if not re.fullmatch(r"^[A-Za-z0-9+\-_]{2,15}$", v):

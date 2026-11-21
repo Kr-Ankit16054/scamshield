@@ -7,15 +7,9 @@
   <meta name="theme-color" content="#fa5500">
   <title>ScamShield — Real-Time Smishing &amp; Fraud Intelligence</title>
 
-  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Tailwind CSS via CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-
-  <!-- Subex Glassmorphic Design System -->
+  <!-- Self-Hosted Typography & Local Tailwind Styles -->
+  <link rel="stylesheet" href="/static/fonts.css">
+  <link rel="stylesheet" href="/static/tailwind.min.css">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body class="bg-white text-gray-900 min-h-screen flex flex-col font-sans antialiased selection:bg-[#fa5500] selection:text-white relative">
@@ -38,7 +32,7 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       
       <!-- Left: Subex 4-Loop Geometric Ribbon Logo & Brand (Click to return to starting position) -->
-      <a href="#top" class="header-brand flex items-center gap-3 hover:opacity-90 transition-opacity cursor-pointer text-inherit no-underline" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" aria-label="ScamShield - Return to starting top">
+      <a href="#top" class="header-brand flex items-center gap-3 hover:opacity-90 transition-opacity cursor-pointer text-inherit no-underline" aria-label="ScamShield - Return to starting top">
         <div class="brand-logo-icon-wrap" aria-hidden="true">
           <svg class="header-logo-icon w-8 h-8 text-[#fa5500] filter drop-shadow-[0_2px_8px_rgba(250,85,0,0.3)]" viewBox="0 0 40 40" fill="none">
             <circle cx="14" cy="14" r="8" stroke="currentColor" stroke-width="2.5" stroke-dasharray="12 4"/>
@@ -638,7 +632,7 @@
           <!-- 3D Amber Shield Graphic -->
           <div class="lg:col-span-5 flex justify-center">
             <div class="relative w-64 h-64 flex items-center justify-center">
-              <div class="absolute inset-4 rounded-full border border-orange-200/80 animate-spin" style="animation-duration: 30s;"></div>
+              <div class="absolute inset-4 rounded-full border border-orange-200/80 animate-spin spin-slow"></div>
               <div class="absolute inset-10 rounded-full border border-orange-300/60"></div>
               
               <svg class="w-44 h-44 relative z-10 filter drop-shadow-[0_15px_30px_rgba(250,85,0,0.3)]" viewBox="0 0 100 120" fill="none">

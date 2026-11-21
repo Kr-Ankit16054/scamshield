@@ -17,3 +17,6 @@ ENV/
 .DS_Store
 Thumbs.db
 
+
+# Vercel deployment artifacts
+.vercel
