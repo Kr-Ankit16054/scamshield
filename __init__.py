@@ -1,0 +1,2 @@
+"""ScamShield root package."""
+

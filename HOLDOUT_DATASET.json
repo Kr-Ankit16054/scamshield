@@ -1,0 +1,802 @@
+[
+  {
+    "id": "HOLD_001",
+    "category": "Genuine Transactional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-IRCTC",
+    "message": "PNR 2849102841: Booking confirmed for 12951 Mumbai Rajdhani in 3A coach B4 berth 32 on 28-Nov-2026. View itinerary at https://www.irctc.co.in."
+  },
+  {
+    "id": "HOLD_002",
+    "category": "Genuine Transactional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AM-AMAZON",
+    "message": "Your Amazon order #402-9182371 has shipped! Track your package delivery status anytime at https://amazon.in."
+  },
+  {
+    "id": "HOLD_003",
+    "category": "Genuine Transactional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "SW-SWIGGY",
+    "message": "Your Swiggy order from Punjabi Rasoi is on its way. Delivery partner Ramesh is arriving in 12 mins. Track live at https://swiggy.com."
+  },
+  {
+    "id": "HOLD_004",
+    "category": "Genuine Transactional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "ZM-ZOMATO",
+    "message": "Order delivered! Enjoy your meal from Pizza Express. Please share your rating and review at https://zomato.com."
+  },
+  {
+    "id": "HOLD_005",
+    "category": "Genuine Transactional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "6E-INDIGO",
+    "message": "Web check-in is now open for your IndiGo flight 6E-204 from Delhi to Bengaluru departing tomorrow. Check in at https://goindigo.in."
+  },
+  {
+    "id": "HOLD_006",
+    "category": "Genuine Transactional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "VK-FLIPKT",
+    "message": "Your Flipkart return for Order #OD928172918 has been picked up. Track your refund status at https://flipkart.com."
+  },
+  {
+    "id": "HOLD_007",
+    "category": "Genuine Transactional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "MS-APPLER",
+    "message": "Your Apple ID receipt for iCloud+ 50GB storage plan (Rs 75.00). Manage your subscription anytime at https://apple.com."
+  },
+  {
+    "id": "HOLD_008",
+    "category": "Genuine Transactional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "GH-GITHUB",
+    "message": "A pull request was assigned to you on antigravity/scamshield. Review details at https://github.com."
+  },
+  {
+    "id": "HOLD_009",
+    "category": "Genuine Transactional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "GG-GOOGLE",
+    "message": "Security alert: New sign-in to your Google Account from Windows in Pune. Review security activity at https://google.com."
+  },
+  {
+    "id": "HOLD_010",
+    "category": "Genuine Transactional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "VM-AIRTEL",
+    "message": "Your Airtel fiber broadband bill of Rs 943 for bill cycle Nov 2026 is generated. View invoice at https://google.com."
+  },
+  {
+    "id": "HOLD_011",
+    "category": "Genuine Urgency",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "6E-INDIGO",
+    "message": "Final call: Boarding gate 14 for flight 6E-512 to Mumbai will close in 15 minutes. Please proceed to the boarding gate immediately."
+  },
+  {
+    "id": "HOLD_012",
+    "category": "Genuine Urgency",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AP-APOLLO",
+    "message": "Reminder: Your appointment with Dr. Mehta is scheduled today in 30 minutes at Apollo Clinic Indiranagar. Please arrive 10 minutes early."
+  },
+  {
+    "id": "HOLD_013",
+    "category": "Genuine Urgency",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-BESCOM",
+    "message": "Electricity bill reminder: Consumer #1029481, current bill amount Rs 1,420 due date is tomorrow 22-Nov-2026. Pay at your nearest BESCOM sub-division."
+  },
+  {
+    "id": "HOLD_014",
+    "category": "Genuine Urgency",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-HDFCBK",
+    "message": "Reminder: Your HDFC Bank credit card payment of INR 8,420 is due in 3 days on 25-Nov-2026. Auto-debit will be initiated from your savings account."
+  },
+  {
+    "id": "HOLD_015",
+    "category": "Genuine Urgency",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "UB-UBERIN",
+    "message": "Your driver partner Santosh is arriving in 2 mins at your pickup location in a White Swift Dzire KA03AB1234."
+  },
+  {
+    "id": "HOLD_016",
+    "category": "Genuine Urgency",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-LICIND",
+    "message": "LIC Premium reminder: Premium of Rs 14,200 for policy #892819281 is due on 30-Nov-2026. Grace period of 30 days is applicable."
+  },
+  {
+    "id": "HOLD_017",
+    "category": "Genuine Urgency",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543101",
+    "message": "Bhai jaldi aaja, cab booked hai aur driver 5 minute me pick up location par pahunch raha hai."
+  },
+  {
+    "id": "HOLD_018",
+    "category": "Genuine Urgency",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543102",
+    "message": "Movie 15 minute me start hone wali hai, popcorn leke seat number 12 par aa jao."
+  },
+  {
+    "id": "HOLD_019",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-HDFCBK",
+    "message": "HDFC Bank Alert: Dear customer, your netbanking password was changed successfully on 21-Nov-2026. If this was not done by you, call 18002026161."
+  },
+  {
+    "id": "HOLD_020",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-SBIINB",
+    "message": "SBI Security Notice: Never share your OTP, UPI PIN, or password with anyone, including bank staff. State Bank never calls asking for confidential credentials."
+  },
+  {
+    "id": "HOLD_021",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "VK-ICICIB",
+    "message": "ICICI Bank: Refund of INR 2,499.00 for cancelled merchant transaction has been credited to your credit card ending 4019 on 21-Nov-2026."
+  },
+  {
+    "id": "HOLD_022",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-AXISBK",
+    "message": "Axis Bank: Your KYC re-verification has been completed successfully at Koramangala branch. No further action is required."
+  },
+  {
+    "id": "HOLD_023",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-AMZNIN",
+    "message": "Your Amazon Pay cashback of Rs 50 for mobile recharge has been credited to your Amazon Pay balance."
+  },
+  {
+    "id": "HOLD_024",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543103",
+    "message": "Hey, did you get the OTP for Netflix login on the living room TV? Please don't share it if it wasn't you trying to log in."
+  },
+  {
+    "id": "HOLD_025",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543104",
+    "message": "Arey bank se message aaya tha security awareness ka, kisi ko apna OTP mat dena kabhi bhi."
+  },
+  {
+    "id": "HOLD_026",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "VK-MYNTRA",
+    "message": "Return accepted! We have initiated a refund of Rs 1,899 for your order #1092819. Amount will reflect in your bank account in 3-5 business days."
+  },
+  {
+    "id": "HOLD_027",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-UIDAI",
+    "message": "Aadhaar authentication successful for transaction #9281729 using biometric mode at Bangalore center on 21-Nov-2026."
+  },
+  {
+    "id": "HOLD_028",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-BLRDEL",
+    "message": "BlueDart tracking #90192812: Out for delivery today. Give delivery verification code 8391 to delivery executive at your doorstep."
+  },
+  {
+    "id": "HOLD_029",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AM-AMAZON",
+    "message": "Your OTP for phone number verification on Amazon is 839210. Valid for 10 minutes. Do not disclose this OTP to anyone."
+  },
+  {
+    "id": "HOLD_030",
+    "category": "Benign Security Context",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543105",
+    "message": "Maine office ke HR portal me pan card verify kar diya hai, form 16 download ho gaya."
+  },
+  {
+    "id": "HOLD_031",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543106",
+    "message": "Hey, are we still meeting at Starbucks for coffee around 4 PM today?"
+  },
+  {
+    "id": "HOLD_032",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543107",
+    "message": "Can you please email me the updated slides for tomorrow's team review meeting?"
+  },
+  {
+    "id": "HOLD_033",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543108",
+    "message": "Happy Birthday Rahul! Wishing you a wonderful year ahead filled with joy and success."
+  },
+  {
+    "id": "HOLD_034",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543109",
+    "message": "Thanks for dinner yesterday, had a great time catching up with everyone."
+  },
+  {
+    "id": "HOLD_035",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543110",
+    "message": "I'm running about 10 minutes late due to traffic on the ring road. Go ahead and start without me."
+  },
+  {
+    "id": "HOLD_036",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543111",
+    "message": "Did you get a chance to review the budget spreadsheet I shared yesterday?"
+  },
+  {
+    "id": "HOLD_037",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543112",
+    "message": "Bhai kal shaam ko badminton khelne chalna hai kya? Court book karun?"
+  },
+  {
+    "id": "HOLD_038",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543113",
+    "message": "Ghar aate waqt dahi aur bread lete aana, mummy ne yaad dilaya tha."
+  },
+  {
+    "id": "HOLD_039",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543114",
+    "message": "Weekend pe farmhouse chalne ka plan ban raha hai, batana free ho to."
+  },
+  {
+    "id": "HOLD_040",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543115",
+    "message": "Haan maine assignment submit kar diya hai portal pe, marks kal aayenge."
+  },
+  {
+    "id": "HOLD_041",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543116",
+    "message": "The plumber finished fixing the leak in the bathroom. Total cost was Rs 350."
+  },
+  {
+    "id": "HOLD_042",
+    "category": "Everyday Conversation",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543117",
+    "message": "Just landed at Delhi airport. Heading to baggage claim now, will call once outside."
+  },
+  {
+    "id": "HOLD_043",
+    "category": "Genuine Promotional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-DOMINO",
+    "message": "Hungry? Get flat 40% off on your favorite medium pizza using coupon code PIZZA40. Valid today at Domino's."
+  },
+  {
+    "id": "HOLD_044",
+    "category": "Genuine Promotional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "VK-CULTFT",
+    "message": "Stay fit! Renew your CultPass annual membership this week and get 2 months free extension. Offer valid in Bangalore."
+  },
+  {
+    "id": "HOLD_045",
+    "category": "Genuine Promotional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AD-TITANW",
+    "message": "Titan Watches: Explore our newly launched ceramic collection at your nearest World of Titan showroom."
+  },
+  {
+    "id": "HOLD_046",
+    "category": "Genuine Promotional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "VK-PVRINO",
+    "message": "Blockbuster weekend at PVR! Book tickets for IMAX 3D and get free caramel popcorn on minimum 2 tickets."
+  },
+  {
+    "id": "HOLD_047",
+    "category": "Genuine Promotional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-MAXFSH",
+    "message": "Max Fashion End of Season Sale: Flat 50% discount across winter wear at all Max stores."
+  },
+  {
+    "id": "HOLD_048",
+    "category": "Genuine Promotional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "VK-STARBK",
+    "message": "Try our handcrafted Hazelnut Macchiato this winter at Starbucks. Enjoy complimentary size upgrade with your Starbucks card."
+  },
+  {
+    "id": "HOLD_049",
+    "category": "Genuine Promotional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "AX-LENSKT",
+    "message": "Lenskart: Your free eye test appointment is confirmed at Indiranagar store on Sunday at 11:30 AM."
+  },
+  {
+    "id": "HOLD_050",
+    "category": "Genuine Promotional",
+    "ground_truth": "SAFE",
+    "obfuscation_type": "none",
+    "sender_id": "VK-DECATH",
+    "message": "Decathlon Sports: Community cycling ride this Saturday morning at 6 AM. Free registration at Sarjapur store."
+  },
+  {
+    "id": "HOLD_051",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "VK-OFFERS",
+    "message": "Flash discount for our loyal customers: Browse the clearance collection at bit.ly/clearance-sale-2026."
+  },
+  {
+    "id": "HOLD_052",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "INFO-SMS",
+    "message": "Customer feedback requested for your recent service experience. Fill out the 2-minute survey at tinyurl.com/svc-feedback-nov."
+  },
+  {
+    "id": "HOLD_053",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "+919876543120",
+    "message": "Hey, I uploaded our vacation photos from Goa to the drive folder: cutt.ly/goa-trip-album."
+  },
+  {
+    "id": "HOLD_054",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "WEBINAR",
+    "message": "Reminder: Digital Marketing Workshop starts at 5 PM today. Access the live streaming link at bit.ly/mktg-webinar-session."
+  },
+  {
+    "id": "HOLD_055",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "NOTIFY-ME",
+    "message": "Your document download link has been generated. Access the meeting agenda PDF at tinyurl.com/agenda-nov26."
+  },
+  {
+    "id": "HOLD_056",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "COMMUNITY",
+    "message": "Apartment Association election voting closes tonight. Register your vote online at bit.ly/society-elections-26."
+  },
+  {
+    "id": "HOLD_057",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "+919876543121",
+    "message": "Bhai maine nayi blog post likhi hai system architecture par, ek bar padh ke feedback dena: cutt.ly/my-tech-blog."
+  },
+  {
+    "id": "HOLD_058",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "TECH-FEST",
+    "message": "National Hackathon 2026: Early bird registrations close soon. Check problem statements and prizes at bit.ly/hack-rules-26."
+  },
+  {
+    "id": "HOLD_059",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "FITNESS-CLUB",
+    "message": "7-Day Yoga Challenge begins this Monday! Check daily session timing and download zoom link at tinyurl.com/yoga-challenge-wk."
+  },
+  {
+    "id": "HOLD_060",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "RECRUIT-HQ",
+    "message": "Your profile matches our open Senior Software Engineer role. View detailed job description and company culture at cutt.ly/swe-role-jd."
+  },
+  {
+    "id": "HOLD_061",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "+919876543122",
+    "message": "Did you check out this podcast on artificial intelligence? Listen here: bit.ly/ai-pod-ep."
+  },
+  {
+    "id": "HOLD_062",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "STARTUP-DAY",
+    "message": "Demo Day pitches start in 1 hour. View participating startups and founder pitch deck summaries at tinyurl.com/demoday-decks."
+  },
+  {
+    "id": "HOLD_063",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "ALUMNI-NET",
+    "message": "Annual Alumni Meet registrations are live! RSVP your attendance and check dinner menu at bit.ly/alumni-rsvp-2026."
+  },
+  {
+    "id": "HOLD_064",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "MUSIC-NIGHT",
+    "message": "Live Acoustic Night this Friday at Hard Rock Cafe. Reserve your table in advance at cutt.ly/acoustic-night-tix."
+  },
+  {
+    "id": "HOLD_065",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "+919876543123",
+    "message": "Here is the shared Google Sheet for tracking our monthly flat expenses: tinyurl.com/flat-expenses-nov."
+  },
+  {
+    "id": "HOLD_066",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "BLOOD-DONOR",
+    "message": "Urgent requirement for O+ blood at Manipal Hospital for surgery tomorrow. Willing volunteers please register at bit.ly/manipal-donor."
+  },
+  {
+    "id": "HOLD_067",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "AUTO-EXPO",
+    "message": "Passes for Delhi Auto Expo 2026 are now available. Download digital entry badge at tinyurl.com/auto-expo-pass."
+  },
+  {
+    "id": "HOLD_068",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "+919876543124",
+    "message": "Bro, check out this real estate flat listing in Whitefield, looks good: bit.ly/whitefield-flat."
+  },
+  {
+    "id": "HOLD_069",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "FOOD-FEST",
+    "message": "Weekend Street Food Carnival in Koramangala. Claim your complimentary tasting vouchers at cutt.ly/food-carnival-pass."
+  },
+  {
+    "id": "HOLD_070",
+    "category": "Ambiguous / Shortener",
+    "ground_truth": "SUSPICIOUS",
+    "obfuscation_type": "shortener",
+    "sender_id": "RUN-CLUB",
+    "message": "Bangalore 10K Marathon bib distribution begins today at Kanteerava Stadium. Verify registration at tinyurl.com/blr-10k-bib."
+  },
+  {
+    "id": "HOLD_071",
+    "category": "Scam KYC & Banking",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543130",
+    "message": "Dear customer, your State Bank of India account #4910 has been placed on hold due to missing mandatory PAN update. Complete verification at http://sbi-kyc-verify.top."
+  },
+  {
+    "id": "HOLD_072",
+    "category": "Scam KYC & Banking",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "VK-HDFCBK",
+    "message": "HDFC Bank Alert: Your netbanking will be suspended within 24 hours. Update your KYC details immediately to avoid account block: http://hdfc-kyc-portal.xyz."
+  },
+  {
+    "id": "HOLD_073",
+    "category": "Scam KYC & Banking",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543131",
+    "message": "Aapka PNB bank khata block ho jayega. Turant apna PAN aur Aadhaar card link karein: http://pnb-verify.top."
+  },
+  {
+    "id": "HOLD_074",
+    "category": "Scam KYC & Banking",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543132",
+    "message": "ICICI Bank Notice: Your credit card account is deactivated. Verify your identity and reactivate your account at http://icici-card-unblock.xyz."
+  },
+  {
+    "id": "HOLD_075",
+    "category": "Scam KYC & Banking",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543133",
+    "message": "Axis Bank Security: Unverified device access detected. Reply with your 6-digit netbanking OTP immediately to cancel unauthorized transfer."
+  },
+  {
+    "id": "HOLD_076",
+    "category": "Scam KYC & Banking",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543134",
+    "message": "Aapka SBI account freeze kar diya gaya hai. Account reactivate karne ke liye apna netbanking password darj karein http://sbi-account-unblock.top."
+  },
+  {
+    "id": "HOLD_077",
+    "category": "Scam Disconnection",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543135",
+    "message": "Electricity Board Notice: Your power connection will be disconnected tonight at 9:30 PM due to pending bill Rs 1,890. Call electricity officer at 9876543991 immediately."
+  },
+  {
+    "id": "HOLD_078",
+    "category": "Scam Disconnection",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543136",
+    "message": "Priye grahak, pichle mahine ka bijli bill update na hone ke karan aaj raat bijli kat jayegi. Turant sampark karein officer 9811223344 par."
+  },
+  {
+    "id": "HOLD_079",
+    "category": "Scam Disconnection",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543137",
+    "message": "TRAI Disconnection Alert: Your mobile SIM service is scheduled for permanent disconnection in 2 hours due to illegal messaging. Call TRAI officer at 9876509922."
+  },
+  {
+    "id": "HOLD_080",
+    "category": "Scam Disconnection",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "BSES-ALERT",
+    "message": "BSES Power: Final disconnection notice for CA #109281. Settle pending electricity charges immediately at http://bses-bill-portal.top to prevent outage."
+  },
+  {
+    "id": "HOLD_081",
+    "category": "Scam Parcel & Delivery",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543138",
+    "message": "India Post: Your package cannot be delivered due to incomplete street address. Update address and pay courier fee Rs 48 at http://indiapost-parcel.top/update."
+  },
+  {
+    "id": "HOLD_082",
+    "category": "Scam Parcel & Delivery",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543139",
+    "message": "DHL Express: Shipment retained at customs terminal Delhi. Pay customs duty charges of Rs 2,450 to release shipment: http://dhl-customs-clearance.xyz."
+  },
+  {
+    "id": "HOLD_083",
+    "category": "Scam Parcel & Delivery",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543140",
+    "message": "Aapka parcel customs me ruka hai. Rs 350 customs fee bharein package release karne ke liye: http://customs-clearance-portal.top."
+  },
+  {
+    "id": "HOLD_084",
+    "category": "Scam Parcel & Delivery",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543141",
+    "message": "FedEx Delivery on hold: Missing apartment number for tracking #891823. Pay redelivery fee of Rs 25 at http://fedex-redelivery.xyz."
+  },
+  {
+    "id": "HOLD_085",
+    "category": "Scam Parcel & Delivery",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543142",
+    "message": "Customs Department Mumbai: International courier addressed to your Aadhaar intercepted. Pay clearance fee of Rs 3,200 at http://customs-duty-pay.top."
+  },
+  {
+    "id": "HOLD_086",
+    "category": "Scam Job & Task",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "JOB-OFFER",
+    "message": "Earn Rs 6,500 daily! Part-time online job: watch YouTube videos and like products. No interview needed. Pay registration fee Rs 499 to get daily payout."
+  },
+  {
+    "id": "HOLD_087",
+    "category": "Scam Job & Task",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "TASK-BOT",
+    "message": "Amazon Part-Time Hiring: Review products from home. Earn Rs 4000 daily payout. Prepaid task job. Join our Telegram task group: t.me/amz-task-hiring."
+  },
+  {
+    "id": "HOLD_088",
+    "category": "Scam Job & Task",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543143",
+    "message": "Ghar baithe paise kamaye: Daily payout Rs 3500. Koi interview nahi. Pay registration fee Rs 299 to start working immediately."
+  },
+  {
+    "id": "HOLD_089",
+    "category": "Scam Job & Task",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543144",
+    "message": "Data Entry part time job: Earn Rs 35,000 monthly from home. No interview needed. Registration fee of Rs 350 required to access software."
+  },
+  {
+    "id": "HOLD_090",
+    "category": "Scam Financial Lure",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "CRYPTO-WIN",
+    "message": "VIP Wealth Scheme: Double your money in 48 hours! 100% guaranteed returns on crypto automated trading bot at http://crypto-double.top."
+  },
+  {
+    "id": "HOLD_091",
+    "category": "Scam Financial Lure",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543145",
+    "message": "Paisa double offer: 24 ghante me paisa double karein! Guaranteed profit. Invest minimum Rs 5000 at http://paisa-double.top."
+  },
+  {
+    "id": "HOLD_092",
+    "category": "Scam Financial Lure",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "LUCKY-DRAW",
+    "message": "Congratulations! Your mobile number won 2nd prize of Rs 25,00,000 in KBC Lucky Draw. Claim your cash reward at http://claim-reward-portal.top."
+  },
+  {
+    "id": "HOLD_093",
+    "category": "Scam Financial Lure",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543146",
+    "message": "Forex Trading Bot: Earn 20% daily profit! Risk-free returns with investment doubling weekly. Sign up now at http://forex-profit.xyz."
+  },
+  {
+    "id": "HOLD_094",
+    "category": "Scam Remote Access",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543147",
+    "message": "Bank Customer Support: Your transaction is blocked. Install AnyDesk app and share your 9-digit code with support officer to unblock your account."
+  },
+  {
+    "id": "HOLD_095",
+    "category": "Scam Remote Access",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543148",
+    "message": "Security Alert: Update your banking application now. Download the latest APK file from http://banking-support.top/sbi-update.apk to avoid deactivation."
+  },
+  {
+    "id": "HOLD_096",
+    "category": "Scam Remote Access",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543149",
+    "message": "SBI Technical Desk: To complete pending KYC verification, install TeamViewer QuickSupport app and allow remote access to your device."
+  },
+  {
+    "id": "HOLD_097",
+    "category": "Scam Extortion",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543150",
+    "message": "Delhi Police Cyber Crime Cell: Arrest warrant issued against you under FIR #402/2026 for illegal hawala transactions. Contact investigating officer on WhatsApp +919876543999 immediately."
+  },
+  {
+    "id": "HOLD_098",
+    "category": "Scam Extortion",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "CBI-OFFICE",
+    "message": "CBI Legal Notice: Court summons pending regarding money laundering inquiry. Call CBI inspector at 9876543888 immediately to avoid non-bailable warrant."
+  },
+  {
+    "id": "HOLD_099",
+    "category": "Scam Payment & Refund",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "none",
+    "sender_id": "+919876543151",
+    "message": "Income Tax Department: Tax refund of Rs 18,420 approved. Click link to verify and claim refund to your bank account: http://tax-refund-portal.top."
+  },
+  {
+    "id": "HOLD_100",
+    "category": "Scam Payment & Refund",
+    "ground_truth": "SCAM",
+    "obfuscation_type": "hinglish_colloquial",
+    "sender_id": "+919876543152",
+    "message": "Maine OLX item ke paise bhej diye hain. Scan this QR code in PhonePe to receive refund Rs 4,500 directly into your bank."
+  }
+]
